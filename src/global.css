@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* variables */
+
+    --header-height: 96px;
+    --max-content-width: 1024px;
+
+    /* padding between viewport and content */
+    --page-px: 24px;
+
+    --primary: 220 25.71% 13.73%;
+    --secondary: 217.78 23.08% 22.94%;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+}

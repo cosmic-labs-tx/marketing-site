@@ -1,0 +1,19 @@
+{
+  "include": ["e2e/**/*", "support/**/*", "../node_modules/cypress"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": true,
+    "types": ["node", "cypress"],
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+
+    "paths": {
+      "~/*": ["../src/*"]
+    }
+  }
+}
