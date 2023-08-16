@@ -1,15 +1,15 @@
 ---
-import Button from "~/components/common/Button.astro";
-import ButtonGroup from "~/components/common/ButtonGroup.astro";
+import { Image } from "astro:assets";
+import waves from "~/assets/waves.png";
+import Hero from "~/components/sections/Hero.astro";
+import Services from "~/components/sections/Services.astro";
 import Layout from "~/layouts/Layout.astro";
 ---
 
 <Layout meta={{ title: "Home", description: "A starter template for Friendly Bear Labs Clients" }}>
-  <main class="grid h-[2000px] place-items-center">
-    <h1>Welcome to the Friendly Bear Labs Starter</h1>
-    <ButtonGroup>
-      <Button>Click me!</Button>
-      <Button>Click me too!</Button>
-    </ButtonGroup>
+  <main id="#main" class="relative space-y-48 lg:space-y-72">
+    <Hero />
+    <Services />
   </main>
+  <Image src={waves} alt="An image of purple waves" class="fixed inset-0 z-[-1] max-h-full" />
 </Layout>

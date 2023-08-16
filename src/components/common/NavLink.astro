@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "~/lib/utils";
+type Props = HTMLAttributes<"a"> & {};
+
+const { href, class: className, ...props } = Astro.props;
+const currentPath = new URL(Astro.request.url).pathname;
+const isActive = href === currentPath;
+---
+
+<a
+  class:list={cn(isActive ? "active" : "", "font-medium transition duration-75 hover:text-accent", className)}
+  href={href}
+  {...props}><slot /></a
+>
+
+<style>
+  .active {
+    color: hsl(var(--accent));
+  }
+</style>

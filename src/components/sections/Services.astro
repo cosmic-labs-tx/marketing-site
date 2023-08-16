@@ -1,0 +1,60 @@
+---
+import { Icon } from "astro-icon/components";
+import Container from "~/components/Container.astro";
+
+const services = [
+  {
+    title: "Custom Web Design",
+    description: "Crafting captivating websites that reinforce your brand identity.",
+    icon: "tabler:rocket",
+  },
+  {
+    title: "Responsive Development",
+    description: "Create seamless experiences across all devices.",
+    icon: "tabler:device-mobile-check",
+  },
+  {
+    title: "E-Commerce Solutions",
+    description: "Build powerful online stores with secure payment gateways.",
+    icon: "tabler:brand-shopee",
+  },
+  {
+    title: "Content Management",
+    description: "Easy content updates with an intuitive CMS.",
+    icon: "tabler:database-cog",
+  },
+  {
+    title: "SEO & Digital Marketing",
+    description: "Boost your online presence with expert strategies and tools.",
+    icon: "tabler:chart-histogram",
+  },
+  {
+    title: "Application Development",
+    description: "Tailor-made apps for enhanced user experiences.",
+    icon: "tabler:apps",
+  },
+];
+---
+
+<div class="w-full bg-white py-28">
+  <Container class="space-y-24">
+    <div class="mx-auto space-y-6 text-center">
+      <h2 class="text-lg font-medium tracking-wide text-accent">WHAT WE DO</h2>
+      <p class="text-4xl font-medium">Taking Your Business to <br />the Next Level</p>
+    </div>
+
+    <ul class="grid auto-rows-auto grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((service) => (
+          <li class="flex h-full w-full flex-col gap-4 text-center">
+            <div class="grid place-items-center">
+              <Icon name={service.icon} class="h-16 w-16 text-primary" />
+            </div>
+            <h3 class="font-bold">{service.title}</h3>
+            <p class="text-lg">{service.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</div>

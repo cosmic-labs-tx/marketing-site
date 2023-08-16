@@ -1,0 +1,19 @@
+---
+import Button from "~/components/common/Button.astro";
+import ButtonGroup from "~/components/common/ButtonGroup.astro";
+import { COMPANY_NAME } from "~/config";
+---
+
+<div class="fade-in-section mx-auto max-w-screen-lg space-y-8 px-6 sm:space-y-8 lg:px-0">
+  <h1 class="text-5xl font-bold sm:text-7xl md:text-8xl">{COMPANY_NAME}</h1>
+  <p class="max-w-lg md:text-2xl">
+    Meet the friendliest <strong class="text-accent">web agency</strong> in town. Our team specializes in crafting
+    websites for <strong class="text-accent">small businesses</strong>, giving you a strong online presence to <strong
+      class="text-accent">grow and adapt</strong
+    > and delighting your customers along the way.
+  </p>
+  <ButtonGroup class="flex flex-col items-center gap-4 sm:flex-row">
+    <Button as="a" href="/schedule-call" size="lg">Let's Talk</Button>
+    <Button as="a" href="/contact" style="outline" size="lg">Send a message</Button>
+  </ButtonGroup>
+</div>

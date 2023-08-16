@@ -12,8 +12,19 @@
     /* padding between viewport and content */
     --page-px: 24px;
 
-    --primary: 220 25.71% 13.73%;
+    --primary: 240 48% 17%;
     --secondary: 217.78 23.08% 22.94%;
+    --accent: 270 98% 62%;
+    --accent-dark: 271 78% 47%;
+    --accent-light: 269 100% 85%;
+  }
+
+  p {
+    @apply font-light;
+  }
+
+  strong {
+    @apply font-medium;
   }
 }
 

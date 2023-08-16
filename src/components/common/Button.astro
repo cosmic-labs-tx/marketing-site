@@ -16,14 +16,14 @@ const sizes = {
 };
 
 const styles = {
-  outline: "border-2 border-secondary hover:bg-primary text-black hover:text-white",
   primary: "bg-primary text-white hover:bg-secondary border-2 border-transparent",
+  outline: "border-2 border-secondary hover:bg-primary text-black hover:text-white",
 };
 ---
 
 <Tag
   class={cn(
-    "w-full select-none rounded text-center ring-gray-200 ring-offset-2 transition focus-visible:ring-2 sm:w-auto",
+    "w-full select-none rounded text-center ring-gray-200 ring-offset-2 font-medium transition focus-visible:ring-2 sm:w-auto",
     styles[style as keyof typeof styles],
     sizes[size as keyof typeof sizes],
     className

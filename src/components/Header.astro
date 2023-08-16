@@ -1,6 +1,8 @@
 ---
 import Container from "~/components/Container.astro";
 import Button from "~/components/common/Button.astro";
+import NavLink from "~/components/common/NavLink.astro";
+import { COMPANY_NAME } from "~/config";
 import { topNavLinks } from "~/constants";
 import { cn } from "~/lib/utils";
 
@@ -14,27 +16,27 @@ const { sticky } = Astro.props;
 <header
   class={cn(
     "flex h-[--header-height] min-h-[--header-height] items-center bg-white",
-    sticky ? "sticky inset-x-0 top-0" : ""
+    sticky ? "sticky inset-x-0 top-0 z-[1]" : ""
   )}
 >
   <Container class="flex h-10 w-full items-center">
-    <span class="font-black">Company Name</span>
+    <span class="font-black">{COMPANY_NAME}</span>
     <!-- Desktop -->
-    <nav class="ml-auto hidden sm:block">
+    <div class="ml-auto hidden sm:block">
       <ul class="flex flex-wrap gap-12">
         {
           topNavLinks.map(({ href, label }) => {
             return (
               <li>
-                <a class="p-2" href={href}>
+                <NavLink class="p-2" href={href}>
                   {label}
-                </a>
+                </NavLink>
               </li>
             );
           })
         }
       </ul>
-    </nav>
+    </div>
 
     <!-- Mobile -->
     <nav class="z-[1] ml-auto sm:hidden">
