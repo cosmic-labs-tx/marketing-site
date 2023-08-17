@@ -14,6 +14,9 @@ module.exports = {
       fontFamily: {
         sans: ["Work Sans", "Inter", ...defaultTheme.fontFamily.sans],
       },
+      backgroundColor: {
+        bg: "hsl(var(--bg) / <alpha-value>)",
+      },
       colors: {
         primary: "hsl(var(--primary) / <alpha-value>)",
         secondary: "hsl(var(--secondary) / <alpha-value>)",

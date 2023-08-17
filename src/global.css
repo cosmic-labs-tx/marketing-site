@@ -12,11 +12,19 @@
     /* padding between viewport and content */
     --page-px: 24px;
 
+    --bg: 0 0% 100%;
     --primary: 240 48% 17%;
     --secondary: 217.78 23.08% 22.94%;
-    --accent: 270 98% 62%;
+    --accent: 258 100% 71%;
     --accent-dark: 271 78% 47%;
     --accent-light: 269 100% 85%;
+
+    /* coolors.io */
+    --medium-slate-blue: hsla(258, 100%, 71%, 1);
+    --space-cadet: hsla(240, 47%, 17%, 1);
+    --teal: hsla(186, 89%, 29%, 1);
+    --mindaro: hsla(76, 60%, 76%, 1);
+    --mindaro-2: hsla(78, 100%, 74%, 1);
   }
 
   p {

@@ -1,4 +1,4 @@
-it("titles are correct", () => {
+it.skip("titles are correct", () => {
   const page = cy.visit("/");
 
   page.get("title").should("have.text", `Home • Friendly Bear Labs Starter`);

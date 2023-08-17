@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
-import Container from "~/components/Container.astro";
+import Container from "~/components/common/Container.astro";
+import Section from "~/components/common/Section.astro";
 
 const services = [
   {
@@ -36,25 +37,25 @@ const services = [
 ];
 ---
 
-<div class="w-full bg-white py-28">
+<Section class="bg-bg">
   <Container class="space-y-24">
     <div class="mx-auto space-y-6 text-center">
       <h2 class="text-lg font-medium tracking-wide text-accent">WHAT WE DO</h2>
-      <p class="text-4xl font-medium">Taking Your Business to <br />the Next Level</p>
+      <p class="mx-auto max-w-sm text-4xl font-medium">Take Your Business to the Next Level</p>
     </div>
 
     <ul class="grid auto-rows-auto grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
       {
-        services.map((service) => (
-          <li class="flex h-full w-full flex-col gap-4 text-center">
+        services.map((s) => (
+          <li class="flex h-full w-full flex-col gap-2 text-center">
             <div class="grid place-items-center">
-              <Icon name={service.icon} class="h-16 w-16 text-primary" />
+              <Icon name={s.icon} class="h-16 w-16 text-primary" />
             </div>
-            <h3 class="font-bold">{service.title}</h3>
-            <p class="text-lg">{service.description}</p>
+            <h3 class="font-bold">{s.title}</h3>
+            <p class="text-lg">{s.description}</p>
           </li>
         ))
       }
     </ul>
   </Container>
-</div>
+</Section>
