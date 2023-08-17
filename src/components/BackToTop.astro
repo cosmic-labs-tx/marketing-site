@@ -6,8 +6,9 @@ import { Icon } from "astro-icon/components";
 <Button
   id="back-to-top"
   size="md"
+  style="accent"
   aria-label="Back to Top"
-  class="fixed bottom-16 right-6 hidden aspect-square w-auto rounded-full p-2.5 text-white shadow-xl transition ease-in-out hover:scale-105"
+  class="fixed bottom-16 right-6 hidden aspect-square w-auto rounded-full p-2.5 text-white shadow-sm shadow-accent transition ease-in-out hover:scale-105"
 >
   <Icon name="tabler:arrow-bar-to-up" class="h-6 w-6" />
 </Button>
@@ -22,12 +23,12 @@ import { Icon } from "astro-icon/components";
       if (window.scrollY >= window.innerHeight * 0.25) {
         if (!isButtonVisible) {
           button.classList.remove("hidden");
-          animate(button, { opacity: [0, 1] }, { duration: 0.5 });
+          animate(button, { opacity: [0, 1] }, { duration: 0.25 });
           isButtonVisible = true;
         }
       } else {
         if (isButtonVisible) {
-          animate(button, { opacity: [1, 0] }, { duration: 0.5 }).finished.then(() => {
+          animate(button, { opacity: [1, 0] }, { duration: 0.25 }).finished.then(() => {
             button.classList.add("hidden");
           });
           isButtonVisible = false;

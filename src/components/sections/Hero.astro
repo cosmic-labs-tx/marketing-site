@@ -16,7 +16,7 @@ import { COMPANY_NAME } from "~/config";
     </p>
     <ButtonGroup class="flex flex-col items-center gap-4 sm:flex-row">
       <Button as="a" href="/schedule-call" size="lg">Let's Talk</Button>
-      <Button as="a" href="/contact" style="outline" size="lg">Send a message</Button>
+      <Button as="a" href="/contact" style="outline" size="lg" class="backdrop-blur-md">Send a message</Button>
     </ButtonGroup>
   </Container>
 </section>
@@ -25,12 +25,12 @@ import { COMPANY_NAME } from "~/config";
   #hero {
     background-image: url("/waves.svg");
     background-repeat: no-repeat;
-    background-position: center bottom -2vw;
+    background-position: center bottom 4rem;
     background-size: 100%;
     background-attachment: scroll;
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1024px) {
     #hero {
       background-position: center bottom -7vw;
     }

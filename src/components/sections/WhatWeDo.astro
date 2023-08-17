@@ -37,17 +37,19 @@ const services = [
 ];
 ---
 
-<Section class="bg-bg">
+<Section id="services" class="bg-bg">
   <Container class="space-y-24">
     <div class="mx-auto space-y-6 text-center">
       <h2 class="text-lg font-medium tracking-wide text-accent">WHAT WE DO</h2>
       <p class="mx-auto max-w-sm text-4xl font-medium">Take Your Business to the Next Level</p>
     </div>
 
-    <ul class="grid auto-rows-auto grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
+    <ul
+      class="flex w-full snap-x snap-mandatory gap-4 overflow-x-auto p-3 sm:grid sm:auto-rows-auto sm:grid-cols-2 sm:gap-16 lg:grid-cols-3"
+    >
       {
         services.map((s) => (
-          <li class="flex h-full w-full flex-col gap-2 text-center">
+          <li class="flex w-4/5 shrink-0 grow basis-4/5 snap-center flex-col gap-2 rounded-2xl border-2 border-primary/25 px-4 py-20 text-center sm:w-full sm:flex-1 sm:snap-none sm:border-none sm:p-0">
             <div class="grid place-items-center">
               <Icon name={s.icon} class="h-16 w-16 text-primary" />
             </div>

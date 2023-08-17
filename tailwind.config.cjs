@@ -11,13 +11,14 @@ module.exports = {
       black: 900,
     },
     extend: {
+      spacing: {
+        4.5: "1.125rem",
+      },
       fontFamily: {
         sans: ["Work Sans", "Inter", ...defaultTheme.fontFamily.sans],
       },
-      backgroundColor: {
-        bg: "hsl(var(--bg) / <alpha-value>)",
-      },
       colors: {
+        bg: "hsl(var(--bg) / <alpha-value>)",
         primary: "hsl(var(--primary) / <alpha-value>)",
         secondary: "hsl(var(--secondary) / <alpha-value>)",
         accent: {
@@ -25,6 +26,9 @@ module.exports = {
           dark: "hsl(var(--accent-dark) / <alpha-value>)",
           light: "hsl(var(--accent-light) / <alpha-value>)",
         },
+        "muted-bg": "hsl(var(--muted-bg) / <alpha-value>)",
+        "muted-foreground": "hsl(var(--muted-foreground) / <alpha-value>)",
+        destructive: "hsl(var(--destructive) / <alpha-value>)",
       },
     },
   },

@@ -22,8 +22,8 @@ const { sticky } = Astro.props;
   <Container class="flex h-10 w-full items-center">
     <span class="font-black">{COMPANY_NAME}</span>
     <!-- Desktop -->
-    <div class="ml-auto hidden sm:block">
-      <ul class="flex flex-wrap gap-12">
+    <div class="ml-auto hidden md:block">
+      <ul class="flex flex-wrap gap-4">
         {
           topNavLinks.map(({ href, label }) => {
             return (
@@ -39,26 +39,27 @@ const { sticky } = Astro.props;
     </div>
 
     <!-- Mobile -->
-    <nav class="z-[1] ml-auto sm:hidden">
-      <div id="mobile-menu-overlay" class="fixed inset-0 hidden bg-gray-500"></div>
+    <nav class="z-[1] ml-auto md:hidden">
       <Button style="outline" aria-label="Open Menu">Menu</Button>
       <!-- Drawer -->
       <div
         id="mobile-menu"
         role="dialog"
         aria-labelledby="mobile-menu-title"
-        class="fixed inset-y-0 right-0 h-screen w-2/3 translate-x-full bg-white p-6 shadow-xl will-change-auto sm:hidden"
+        class="fixed inset-x-0 top-0 hidden h-screen w-full translate-y-[-5%] bg-white p-6 shadow-xl will-change-auto sm:hidden"
       >
-        <Button style="outline" class="w-min" aria-label="Close Menu">Close</Button>
-        <h2 id="mobile-menu-title" class="sr-only">Navigation</h2>
-        <ul class="mt-8 flex flex-col gap-12 border-t border-gray-200 pt-8">
+        <div class="flex justify-end">
+          <Button style="outline" class="w-min" aria-label="Close Menu">Close</Button>
+        </div>
+        <h2 id="mobile-menu-title" class="sr-only">Navigation Links</h2>
+        <ul class="mt-8 flex flex-col items-center gap-12 border-t border-gray-200 pt-8">
           {
             topNavLinks.map(({ href, label }) => {
               return (
                 <li>
-                  <a class="p-2 first-of-type:-mt-2" href={href}>
+                  <NavLink class="p-2 text-center text-xl font-bold" href={href}>
                     {label}
-                  </a>
+                  </NavLink>
                 </li>
               );
             })
@@ -72,32 +73,38 @@ const { sticky } = Astro.props;
 <script>
   import { animate } from "motion";
   const mobileMenu = document.getElementById("mobile-menu");
-  const overlay = document.getElementById("mobile-menu-overlay");
+  const mobileMenuNavItems = document.querySelectorAll("#mobile-menu a");
   const openMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Open Menu']");
   const closeMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Close Menu']");
 
   function openNav() {
-    if (!mobileMenu || !overlay) return;
-    overlay.classList.remove("hidden");
+    if (!mobileMenu) return;
+    document.body.style.overflow = "hidden";
     mobileMenu.classList.remove("hidden");
 
-    animate(mobileMenu, { transform: ["translateX(100%)", "translateX(0)"] });
-    animate(overlay, { opacity: [0, 0.75] });
+    animate(
+      mobileMenu,
+      {
+        transform: ["translateY(-5%)", "translateY(0)"],
+        opacity: [0, 1],
+      },
+      { duration: 0.3 }
+    );
   }
 
   function closeNav() {
-    if (!mobileMenu || !overlay) return;
+    if (!mobileMenu) return;
+    document.body.style.overflow = "auto";
 
-    animate(mobileMenu, { transform: ["translateX(0)", "translateX(100%)"] }, { duration: 0.25 }).finished.then(() => {
+    animate(
+      mobileMenu,
+      {
+        opacity: [1, 0],
+      },
+      { duration: 0.2 }
+    ).finished.then(() => {
       mobileMenu.classList.add("hidden");
     });
-    animate(overlay, { opacity: [0.75, 0] }).finished.then(() => {
-      overlay.classList.add("hidden");
-    });
-  }
-
-  if (overlay) {
-    overlay.addEventListener("click", () => closeNav());
   }
 
   if (openMenuButton) {
@@ -110,6 +117,14 @@ const { sticky } = Astro.props;
   if (closeMenuButton) {
     closeMenuButton.addEventListener("click", () => {
       closeNav();
+    });
+  }
+
+  if (mobileMenuNavItems) {
+    mobileMenuNavItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        closeNav();
+      });
     });
   }
 </script>

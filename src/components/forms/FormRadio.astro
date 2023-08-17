@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "~/lib/utils";
+type Props = HTMLAttributes<"input"> & {
+  label: string;
+};
+const { label, class: className, ...rest } = Astro.props;
+---
+
+<label class="group inline-flex cursor-pointer select-none items-center gap-3">
+  <input
+    type="radio"
+    class:list={cn(
+      "h-4.5 w-4.5 border-muted-foreground text-accent transition focus:ring-accent disabled:cursor-not-allowed disabled:opacity-50",
+      className
+    )}
+    {...rest}
+  />
+  <span class="block font-medium leading-6">{label}</span>
+</label>

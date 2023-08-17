@@ -6,25 +6,47 @@
   :root {
     /* variables */
 
-    --header-height: 96px;
-    --max-content-width: 1024px;
-
     /* padding between viewport and content */
     --page-px: 24px;
+    --header-height: 96px;
+    --max-content-width: calc(1024px + var(--page-px) * 2);
 
+    /* Colors */
     --bg: 0 0% 100%;
-    --primary: 240 48% 17%;
-    --secondary: 217.78 23.08% 22.94%;
-    --accent: 258 100% 71%;
-    --accent-dark: 271 78% 47%;
-    --accent-light: 269 100% 85%;
+    --foreground: 240 47% 17%;
 
-    /* coolors.io */
+    --primary: 240 47% 17%;
+    --secondary: 217 23% 23%;
+    --accent: 258 100% 71%;
+    --accent-dark: 261 93% 58%;
+    --accent-light: 255 100% 76%;
+
+    --muted-bg: 0 0% 100%;
+    --muted-foreground: 216 12% 84%;
+
+    --destructive: 0 100% 50%;
+
+    /* coolors.io palette w Harriet */
     --medium-slate-blue: hsla(258, 100%, 71%, 1);
     --space-cadet: hsla(240, 47%, 17%, 1);
     --teal: hsla(186, 89%, 29%, 1);
     --mindaro: hsla(76, 60%, 76%, 1);
     --mindaro-2: hsla(78, 100%, 74%, 1);
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent));
+    color: var(--mindaro-2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   p {
@@ -34,10 +56,38 @@
   strong {
     @apply font-medium;
   }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
 }
 
 @layer components {
 }
 
 @layer utilities {
+}
+
+@layer base {
+  [type="text"]:focus,
+  [type="email"]:focus,
+  [type="url"]:focus,
+  [type="password"]:focus,
+  [type="number"]:focus,
+  [type="date"]:focus,
+  [type="datetime-local"]:focus,
+  [type="month"]:focus,
+  [type="search"]:focus,
+  [type="tel"]:focus,
+  [type="checkbox"]:focus,
+  [type="radio"]:focus,
+  [type="time"]:focus,
+  [type="week"]:focus,
+  [multiple]:focus,
+  textarea:focus,
+  select:focus {
+    --tw-ring-color: var(--primary);
+    border-color: var(--primary);
+  }
 }
