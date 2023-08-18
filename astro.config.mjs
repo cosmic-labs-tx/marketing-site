@@ -7,7 +7,7 @@ import prefetch from "@astrojs/prefetch";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fill-me-out.com",
+  site: "https://friendlybearlabs.com",
   output: "static",
   integrations: [tailwind({ applyBaseStyles: false }), sitemap(), prefetch(), icon({ include: { tabler: ["*"] } })],
   experimental: {
