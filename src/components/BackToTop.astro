@@ -7,9 +7,9 @@ import { Icon } from "astro-icon/components";
   id="back-to-top"
   size="md"
   style="accent"
-  aria-label="Back to Top"
-  class="fixed bottom-16 right-6 hidden aspect-square w-auto rounded-full p-2.5 text-white shadow-sm shadow-accent transition ease-in-out hover:scale-105"
+  class="fixed bottom-6 right-6 hidden aspect-square w-auto rounded-full p-3 text-white shadow-sm shadow-accent transition ease-in-out hover:scale-105"
 >
+  <span class="sr-only">Back to top</span>
   <Icon name="tabler:arrow-bar-to-up" class="h-6 w-6" />
 </Button>
 
@@ -20,7 +20,7 @@ import { Icon } from "astro-icon/components";
 
   if (button) {
     window.addEventListener("scroll", () => {
-      if (window.scrollY >= window.innerHeight * 0.25) {
+      if (window.scrollY >= document.body.scrollHeight * 0.15) {
         if (!isButtonVisible) {
           button.classList.remove("hidden");
           animate(button, { opacity: [0, 1] }, { duration: 0.25 });

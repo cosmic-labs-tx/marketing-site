@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "~/components/common/Button.astro";
+import type { pricingTiers } from "~/constants";
+import { cn } from "~/lib/utils";
+type Props = (typeof pricingTiers)[number];
+
+const { id, name, price, description, mostPopular, href, features } = Astro.props;
+---
+
+<div
+  class={cn(
+    mostPopular ? "order-first bg-white/5 ring-2 ring-accent lg:order-none" : "order-none ring-1 ring-white/10",
+    "flex-1 rounded-3xl p-8"
+  )}
+>
+  <div class="flex items-center justify-between gap-x-4">
+    <h3 id={id} class="text-lg font-bold leading-8 text-white">
+      {name}
+    </h3>
+    {
+      mostPopular && (
+        <p class="rounded-full bg-accent px-2.5 py-1 text-xs font-bold leading-5 text-white">Most popular</p>
+      )
+    }
+  </div>
+  <p class="mt-4 text-sm leading-6 text-gray-300">{description}</p>
+  <p class="mt-6 text-4xl font-bold tracking-tight text-white">{price}</p>
+  <Button
+    as="a"
+    style={mostPopular ? "accent" : "outline"}
+    href={href}
+    aria-describedby={id}
+    class={cn(mostPopular ? "shadow-sm" : "bg-white/10 text-white hover:bg-white/20", "mt-6 block")}
+  >
+    Book a Call
+  </Button>
+  <ul class="mt-8 space-y-3 leading-6 text-gray-300 xl:mt-10">
+    {
+      features.map((feature) => (
+        <li class="flex gap-x-3">
+          <Icon name="tabler:check" class="h-6 w-5 flex-none text-white" aria-hidden="true" />
+          {feature}
+        </li>
+      ))
+    }
+  </ul>
+</div>

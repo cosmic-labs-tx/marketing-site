@@ -1,0 +1,20 @@
+---
+import Button from "~/components/common/Button.astro";
+import ButtonGroup from "~/components/common/ButtonGroup.astro";
+import Container from "~/components/common/Container.astro";
+import Section from "~/components/common/Section.astro";
+---
+
+<Section>
+  <Container class="space-y-12">
+    <h2 class="text-5xl font-bold md:text-6xl lg:text-7xl">Ready to get started?</h2>
+    <p class="max-w-lg lg:text-lg">
+      We're ready to help you take your business to the next level. Whether you're looking for a new website, a
+      redesign, or just some help with your existing site, we're here to help.
+    </p>
+    <ButtonGroup>
+      <Button as="a" href="/schedule-call" size="lg">Book a call</Button>
+      <Button as="a" href="/contact" style="outline" size="lg">Ask a question</Button>
+    </ButtonGroup>
+  </Container>
+</Section>

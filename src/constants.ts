@@ -43,7 +43,7 @@ export const pricingTiers = [
     name: "Bigfoot",
     id: "tier-bigfoot",
     href: "/schedule-call?tier=bigfoot",
-    price: "$3,500 +",
+    price: "$4,500 +",
     description: "A custom website that scales with your business.",
     features: [
       "Custom design",
@@ -73,8 +73,8 @@ export const addons = [
   {
     id: "blog",
     name: "Targeted blog posts",
-    price: "$100/month (per post)",
-    description: "Targeted blog posts to drive traffic to your website.",
+    price: "$100/month",
+    description: "Monthly posts to drive traffic to your website.",
   },
   {
     id: "seo",
