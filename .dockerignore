@@ -1,0 +1,34 @@
+# flyctl launch added from .gitignore
+# build output
+**/dist
+
+# generated types
+**/.astro
+
+# dependencies
+**/node_modules
+
+# logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# environment variables
+**/.env
+**/.env.production
+
+# macOS-specific files
+**/.DS_Store
+**/.eslintcache
+
+# test files
+cypress/screenshots
+cypress/videos
+
+# flyctl launch added from .husky/.gitignore
+.husky/**/_
+
+# flyctl launch added from .husky/_/.gitignore
+.husky/_/**/*
+fly.toml
