@@ -1,4 +1,4 @@
-name: 🛠️ Build
+name: 🛠️ Build & Deploy
 on:
   pull_request:
   push:
@@ -30,6 +30,7 @@ jobs:
           start: npm run preview
   deploy:
     name: 🚀 Deploy
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
