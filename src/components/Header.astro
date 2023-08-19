@@ -23,12 +23,12 @@ const { sticky } = Astro.props;
     <span class="font-black">{COMPANY_NAME}</span>
     <!-- Desktop -->
     <div class="ml-auto hidden md:block">
-      <ul class="flex flex-wrap gap-4">
+      <ul class="flex flex-wrap gap-8">
         {
           topNavLinks.map(({ href, label }) => {
             return (
               <li>
-                <NavLink class="p-2" href={href}>
+                <NavLink class="py-2" href={href}>
                   {label}
                 </NavLink>
               </li>
@@ -57,7 +57,7 @@ const { sticky } = Astro.props;
             topNavLinks.map(({ href, label }) => {
               return (
                 <li>
-                  <NavLink class="p-2 text-center text-xl font-bold" href={href}>
+                  <NavLink class="py-2 text-center text-xl font-bold" href={href}>
                     {label}
                   </NavLink>
                 </li>

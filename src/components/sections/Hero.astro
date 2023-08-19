@@ -2,12 +2,11 @@
 import Button from "~/components/common/Button.astro";
 import ButtonGroup from "~/components/common/ButtonGroup.astro";
 import Container from "~/components/common/Container.astro";
-import { COMPANY_NAME } from "~/config";
 ---
 
 <section id="hero" class="w-full pb-48">
-  <Container class="space-y-8 sm:space-y-8">
-    <h1 class="text-5xl font-bold sm:text-6xl lg:text-8xl">{COMPANY_NAME}</h1>
+  <Container class="space-y-5 sm:space-y-8">
+    <h1 class="max-w-xl text-5xl font-bold sm:text-6xl lg:max-w-4xl lg:text-8xl">We Get Small Businesses Online</h1>
     <p class="max-w-lg text-xl sm:text-2xl">
       Meet the friendliest <strong class="text-accent">web agency</strong> in town. Our team specializes in crafting
       websites for <strong class="text-accent">small businesses</strong>, giving you a strong online presence to <strong
@@ -32,7 +31,7 @@ import { COMPANY_NAME } from "~/config";
 
   @media (min-width: 1024px) {
     #hero {
-      background-position: center bottom -7vw;
+      background-position: center bottom -9vw;
     }
   }
 </style>

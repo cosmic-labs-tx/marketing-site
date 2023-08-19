@@ -1,6 +1,7 @@
 ---
 import Container from "~/components/common/Container.astro";
 import Section from "~/components/common/Section.astro";
+import SectionTitle from "~/components/common/SectionTitle.astro";
 import Addon from "~/components/sections/Addon.astro";
 import PricingCard from "~/components/sections/PricingCard.astro";
 import { addons, pricingTiers } from "~/constants";
@@ -9,7 +10,7 @@ import { addons, pricingTiers } from "~/constants";
 <Section id="pricing" class="bg-primary text-white">
   <Container class="flex flex-col items-center justify-between gap-12">
     <div class="mx-auto space-y-6 text-center">
-      <h2 class="text-lg font-medium tracking-wide text-accent-light">PRICING</h2>
+      <SectionTitle>PRICING</SectionTitle>
       <p class="mx-auto max-w-md text-2xl font-medium sm:text-4xl">Prices That Make Sense For Small Businesses</p>
     </div>
 
@@ -18,7 +19,7 @@ import { addons, pricingTiers } from "~/constants";
     </div>
 
     <div class="w-full">
-      <h2 class="text-center text-lg font-medium tracking-wide text-accent-light">ADDONS</h2>
+      <SectionTitle>ADD-ONS</SectionTitle>
       <div class="isolate mx-auto mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {addons.map((a) => <Addon {...a} />)}
       </div>

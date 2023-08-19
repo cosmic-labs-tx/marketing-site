@@ -10,8 +10,8 @@ const isActive = href === currentPath;
 
 <a
   class:list={cn(
-    isActive ? "active focus-visible:outline-accent" : "focus-visible:outline-primary",
-    "font-medium transition duration-75 hover:text-accent focus-visible:outline-2",
+    isActive ? "active border-accent focus-visible:outline-accent" : "border-transparent focus-visible:outline-primary",
+    "border-b-[3px] font-medium transition duration-75 hover:text-accent focus-visible:outline-2",
     className
   )}
   href={href}

@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Container from "~/components/common/Container.astro";
 import Section from "~/components/common/Section.astro";
+import SectionTitle from "~/components/common/SectionTitle.astro";
 
 const services = [
   {
@@ -40,7 +41,7 @@ const services = [
 <Section id="services" class="bg-bg">
   <Container class="space-y-24">
     <div class="mx-auto space-y-6 text-center">
-      <h2 class="text-lg font-medium tracking-wide text-accent">WHAT WE DO</h2>
+      <SectionTitle>WHAT WE DO</SectionTitle>
       <p class="mx-auto max-w-sm text-4xl font-medium">Take Your Business to the Next Level</p>
     </div>
 
@@ -53,7 +54,7 @@ const services = [
             <div class="grid place-items-center">
               <Icon name={s.icon} class="h-16 w-16 text-primary" />
             </div>
-            <h3 class="text-lg font-medium uppercase tracking-wide text-accent">{s.title}</h3>
+            <h3 class="font-medium uppercase tracking-wide text-accent">{s.title}</h3>
             <p class="text-lg">{s.description}</p>
           </li>
         ))
