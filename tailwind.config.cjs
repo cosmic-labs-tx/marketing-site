@@ -15,7 +15,7 @@ module.exports = {
         4.5: "1.125rem",
       },
       fontFamily: {
-        sans: ["Work Sans", "Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Work Sans Variable", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         bg: "hsl(var(--bg) / <alpha-value>)",

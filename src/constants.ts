@@ -6,6 +6,39 @@ export const topNavLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+export const services = [
+  {
+    title: "Custom Web Design",
+    description: "Crafting captivating websites that reinforce your brand identity.",
+    icon: "tabler:rocket",
+  },
+  {
+    title: "Responsive Development",
+    description: "Create seamless experiences across all devices.",
+    icon: "tabler:device-mobile-check",
+  },
+  {
+    title: "E-Commerce Solutions",
+    description: "Build powerful online stores with secure payment gateways.",
+    icon: "tabler:brand-shopee",
+  },
+  {
+    title: "Content Management",
+    description: "Easy content updates with an intuitive CMS.",
+    icon: "tabler:database-cog",
+  },
+  {
+    title: "SEO & Digital Marketing",
+    description: "Boost your online presence with expert strategies and tools.",
+    icon: "tabler:chart-histogram",
+  },
+  {
+    title: "Application Development",
+    description: "Tailor-made apps for enhanced user experiences.",
+    icon: "tabler:apps",
+  },
+] as const;
+
 export const pricingTiers = [
   {
     name: "Cub",

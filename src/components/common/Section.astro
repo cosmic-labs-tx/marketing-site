@@ -6,6 +6,6 @@ type Props = HTMLAttributes<"section">;
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class={cn("py-20 sm:py-28 w-full", className)} {...props}>
+<section class={cn("py-20 sm:py-28 w-full scroll-m-8", className)} {...props}>
   <slot />
 </section>

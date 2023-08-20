@@ -1,11 +1,11 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "~/lib/utils";
-type Props = HTMLAttributes<"h2">;
+type Props = HTMLAttributes<"p">;
 
 const { class: className, ...rest } = Astro.props;
 ---
 
-<h2 class={cn("text-center text-lg font-bold tracking-[0.2em]", className)} {...rest}>
+<p class={cn("mx-auto text-4xl font-medium", className)} {...rest}>
   <slot />
-</h2>
+</p>

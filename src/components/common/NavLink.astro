@@ -1,7 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "~/lib/utils";
-type Props = HTMLAttributes<"a">;
+type Props = HTMLAttributes<"a"> & {
+  href: string;
+};
 
 const { href, class: className, ...props } = Astro.props;
 const currentPath = new URL(Astro.request.url).pathname;
@@ -9,8 +11,9 @@ const isActive = href === currentPath;
 ---
 
 <a
+  data-type="top-nav-link"
   class:list={cn(
-    isActive ? "active border-accent focus-visible:outline-accent" : "border-transparent focus-visible:outline-primary",
+    isActive ? "active" : "border-transparent focus-visible:outline-primary",
     "border-b-[3px] font-medium transition duration-75 hover:text-accent focus-visible:outline-2",
     className
   )}
@@ -20,6 +23,11 @@ const isActive = href === currentPath;
 
 <style>
   .active {
-    color: hsl(var(--accent));
+    color: hsl(var(--accent-dark));
+    border-color: hsl(var(--accent-dark));
+  }
+
+  .active:focus-visible {
+    outline-color: hsl(var(--accent-dark));
   }
 </style>

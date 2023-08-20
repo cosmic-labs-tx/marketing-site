@@ -20,7 +20,7 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
     </h3>
     {
       mostPopular && (
-        <p class="rounded-full bg-accent px-2.5 py-1 text-xs font-bold leading-5 text-white">Most popular</p>
+        <p class="rounded-full bg-accent-dark px-2.5 py-1 text-xs font-bold leading-5 text-white">Most popular</p>
       )
     }
   </div>
@@ -31,7 +31,7 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
     style={mostPopular ? "accent" : "outline"}
     href={href}
     aria-describedby={id}
-    class={cn(mostPopular ? "shadow-sm" : "bg-white/10 text-white hover:bg-white/20", "mt-6 block")}
+    class={cn(mostPopular ? "shadow-sm bg-accent-dark" : "bg-white/10 text-white hover:bg-white/20", "mt-6 block")}
   >
     Book a Call
   </Button>

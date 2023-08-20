@@ -1,5 +1,4 @@
 ---
-import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import BackToTop from "~/components/BackToTop.astro";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
@@ -13,7 +12,7 @@ type Props = {
   };
 };
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
   meta: { title, description },
@@ -37,9 +36,6 @@ const {
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐻</text></svg>"
     />
-    <GoogleFontsOptimizer
-      url="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap"
-    />
 
     <script
       async
@@ -47,12 +43,6 @@ const {
       src="https://analytics.umami.is/script.js"
       data-website-id="9e145e29-b825-4715-bd63-c4a68fca0828"
       data-domains="friendlybearlabs.com,www.friendlybearlabs.com"></script>
-
-    <style is:global>
-      img {
-        content-visibility: auto;
-      }
-    </style>
   </head>
   <body id="body" class="flex h-full min-h-full flex-col text-primary">
     <SkipLink />

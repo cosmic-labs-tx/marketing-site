@@ -1,3 +1,5 @@
+@import "@fontsource-variable/work-sans";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +15,7 @@
 
     /* Colors */
     --bg: 0 0% 100%;
+    --bg-dark: 240 47% 17%;
     --foreground: 240 47% 17%;
 
     --primary: 240 47% 17%;
@@ -60,6 +63,10 @@
   a,
   button {
     touch-action: manipulation;
+  }
+
+  img {
+    content-visibility: auto;
   }
 }
 
