@@ -5,7 +5,7 @@ type Props = HTMLAttributes<"a"> & {
   href: string;
 };
 
-const { href, class: className, ...props } = Astro.props;
+const { href, class: className, ...rest } = Astro.props;
 const currentPath = new URL(Astro.request.url).pathname;
 const isActive = href === currentPath;
 ---
@@ -13,21 +13,12 @@ const isActive = href === currentPath;
 <a
   data-type="top-nav-link"
   class:list={cn(
-    isActive ? "active" : "border-transparent focus-visible:outline-primary",
+    isActive
+      ? "border-accent text-accent focus-visible:outline-accent"
+      : "border-transparent focus-visible:outline-primary",
     "border-b-[3px] font-medium transition duration-75 hover:text-accent focus-visible:outline-2",
     className
   )}
   href={href}
-  {...props}><slot /></a
+  {...rest}><slot /></a
 >
-
-<style>
-  .active {
-    color: hsl(var(--accent-dark));
-    border-color: hsl(var(--accent-dark));
-  }
-
-  .active:focus-visible {
-    outline-color: hsl(var(--accent-dark));
-  }
-</style>

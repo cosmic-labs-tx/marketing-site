@@ -3,9 +3,9 @@ import type { HTMLAttributes } from "astro/types";
 import { cn } from "~/lib/utils";
 type Props = HTMLAttributes<"section">;
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...rest } = Astro.props;
 ---
 
-<section class={cn("py-20 sm:py-28 w-full scroll-m-8", className)} {...props}>
+<section class={cn("py-20 sm:py-28 w-full scroll-m-8", className)} {...rest}>
   <slot />
 </section>

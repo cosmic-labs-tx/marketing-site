@@ -19,6 +19,10 @@ import { addons, pricingTiers } from "~/constants";
       {pricingTiers.map((t) => <PricingCard {...t} />)}
     </div>
 
+    <p class="text-xs text-muted-foreground">
+      *Prices displayed are estimates and are subject to change based on final requirements and project parameters
+    </p>
+
     <div class="w-full">
       <SectionTitle>ADD-ONS</SectionTitle>
       <div class="isolate mx-auto mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -10,7 +10,9 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
 
 <div
   class={cn(
-    mostPopular ? "order-first bg-white/5 ring-2 ring-accent lg:order-none" : "order-none ring-1 ring-white/10",
+    mostPopular
+      ? "order-first bg-white/5 ring-2 ring-accent lg:order-none"
+      : "order-none ring-1 ring-white/10 contrast-more:ring-white",
     "flex-1 rounded-3xl p-8"
   )}
 >
@@ -20,22 +22,22 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
     </h3>
     {
       mostPopular && (
-        <p class="rounded-full bg-accent-dark px-2.5 py-1 text-xs font-bold leading-5 text-white">Most popular</p>
+        <p class="rounded-full bg-accent px-2.5 py-1 text-xs font-bold leading-5 text-white">Most popular</p>
       )
     }
   </div>
-  <p class="mt-4 text-sm leading-6 text-gray-300">{description}</p>
+  <p class="mt-4 text-sm leading-6 text-gray-300 contrast-more:text-white">{description}</p>
   <p class="mt-6 text-4xl font-bold tracking-tight text-white">{price}</p>
   <Button
     as="a"
     style={mostPopular ? "accent" : "outline"}
     href={href}
     aria-describedby={id}
-    class={cn(mostPopular ? "shadow-sm bg-accent-dark" : "bg-white/10 text-white hover:bg-white/20", "mt-6 block")}
+    class={cn(mostPopular ? "shadow-sm bg-accent" : "bg-white/10 text-white hover:bg-white/20", "mt-6 block")}
   >
     Book a Call
   </Button>
-  <ul class="mt-8 space-y-3 leading-6 text-gray-300 xl:mt-10">
+  <ul class="mt-8 space-y-3 leading-6 text-gray-300 contrast-more:text-white xl:mt-10">
     {
       features.map((feature) => (
         <li class="flex gap-x-3">
