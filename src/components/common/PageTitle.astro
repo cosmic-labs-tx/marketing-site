@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "~/lib/utils";
+type Props = HTMLAttributes<"h2">;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<h1 class={cn("text-5xl font-bold", className)} {...rest}>
+  <slot />
+</h1>

@@ -1,4 +1,5 @@
 ---
+import PageTitle from "~/components/common/PageTitle.astro";
 import { COMPANY_NAME } from "~/config";
 import Layout from "~/layouts/Layout.astro";
 
@@ -11,7 +12,7 @@ const meta = {
 
 <Layout meta={meta}>
   <main class="mx-auto h-full w-full max-w-screen-xl px-6 lg:px-0">
-    <h1 class="text-center text-5xl font-bold">Schedule a call</h1>
+    <PageTitle class="text-center">Schedule a call</PageTitle>
     <div class="mt-8 h-full min-h-[570px] w-full overflow-scroll md:mt-16" id="my-cal-inline"></div>
   </main>
 </Layout>
