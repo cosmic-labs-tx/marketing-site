@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Button from "~/components/common/Button.astro";
 import Container from "~/components/common/Container.astro";
 import PageTitle from "~/components/common/PageTitle.astro";
@@ -8,19 +9,36 @@ import FormLabel from "~/components/forms/FormLabel.astro";
 import FormRadio from "~/components/forms/FormRadio.astro";
 import FormTextArea from "~/components/forms/FormTextArea.astro";
 import Layout from "~/layouts/Layout.astro";
+import { cn } from "~/lib/utils";
+import { LATEST_REPLY_HOUR } from "~/config";
 
 const meta = {
   title: "Connect with Us",
   description:
     "Connect with us at Friendly Bear Labs. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!",
 };
+
+const now = new Date();
+const currentTime = now.getHours();
+const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today" : "tomorrow";
 ---
 
 <Layout meta={meta}>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <Container class="space-y-8">
     <div>
       <PageTitle>Let's work together</PageTitle>
-      <p class="mt-4 text-2xl">We can't wait to hear from you.</p>
+      <p class="mt-6 text-2xl font-normal">We can't wait to hear from you.</p>
+      <p class="mt-1 flex items-center gap-1 text-sm">
+        <span>We'll respond</span><strong class={cn(hearBack === "today" ? "text-accent" : "text-primary", "font-bold")}
+          >{hearBack}</strong
+        ><Icon
+          class={cn(hearBack === "today" ? "text-accent" : "text-primary")}
+          name={hearBack === "today" ? "tabler:discount-check-filled" : "tabler:calendar-star"}
+        />
+      </p>
     </div>
 
     <div>
@@ -110,13 +128,14 @@ const meta = {
 </Layout>
 
 <script>
-  const attribution = document.getElementById("attribution");
-  const attributionOther = document.getElementById("attribution-other");
-  const attributionOtherLabel = document.getElementById("attribution-other-label");
+  const attribution = document.getElementById("attribution") as HTMLSelectElement | null;
+  const attributionOther = document.getElementById("attribution-other") as HTMLDivElement | null;
+  const attributionOtherLabel = document.getElementById("attribution-other-label") as HTMLLabelElement | null;
 
-  if (attribution instanceof HTMLSelectElement && attributionOther instanceof HTMLDivElement) {
+  if (attribution && attributionOther) {
     attribution.addEventListener("change", (e) => {
       if (!(e.target instanceof HTMLSelectElement) || !(attributionOtherLabel instanceof HTMLLabelElement)) {
+        console.log("hi", e.target, attributionOtherLabel);
         return;
       }
 

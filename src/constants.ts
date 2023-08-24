@@ -98,16 +98,16 @@ export const addons = [
     description: "Secure hosting with SSL certificate and domain management",
   },
   {
-    id: "cms",
-    name: "Content management system",
-    price: "$100/month",
-    description: "Manage your website content with ease whenever you want.",
-  },
-  {
     id: "blog",
     name: "Targeted blog posts",
     price: "$100/month",
     description: "Monthly posts to drive traffic to your website.",
+  },
+  {
+    id: "cms",
+    name: "Content management system",
+    price: "$150/month",
+    description: "Manage your website content with ease whenever you want.",
   },
   {
     id: "seo",

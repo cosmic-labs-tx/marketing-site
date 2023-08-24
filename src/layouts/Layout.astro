@@ -37,6 +37,7 @@ const {
     <meta name="ICBM" content="32.948179, -96.729721" />
 
     <ViewTransitions />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalURL} />
     <link
       rel="icon"
@@ -49,6 +50,7 @@ const {
       src="https://analytics.umami.is/script.js"
       data-website-id="9e145e29-b825-4715-bd63-c4a68fca0828"
       data-domains="friendlybearlabs.com,www.friendlybearlabs.com"></script>
+    <slot name="head" />
   </head>
   <body id="body" class="flex h-full min-h-full flex-col text-primary">
     <SkipLink />
