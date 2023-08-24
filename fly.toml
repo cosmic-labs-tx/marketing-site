@@ -1,10 +1,9 @@
-# fly.toml app configuration file generated for fbl-marketing-site on 2023-08-17T19:08:25-05:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = "fbl-marketing-site"
 primary_region = "dfw"
+
+[env]
+  TURNSTILE_SITEKEY="0x4AAAAAAAJN3VjuceAYMzev"
+  UMAMI_WEBSITE_ID="9e145e29-b825-4715-bd63-c4a68fca0828"
 
 [build]
   dockerfile = "./Dockerfile"

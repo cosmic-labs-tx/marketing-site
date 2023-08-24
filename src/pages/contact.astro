@@ -25,7 +25,8 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
 ---
 
 <Layout meta={meta}>
-  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb" async defer
+  ></script>
 
   <Container class="space-y-8">
     <div>
@@ -50,22 +51,42 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
       >
         <FormField>
           <FormLabel for="name">Name</FormLabel>
-          <FormInput id="name" name="name" required placeholder="Steve Zissou" type="text" />
+          <FormInput id="name" name="name" required placeholder="Steve Zissou" type="text" autocomplete="name" />
         </FormField>
 
         <FormField>
           <FormLabel for="email">Email</FormLabel>
-          <FormInput id="email" name="email" required placeholder="steve@lifeaquatic.com" type="email" />
+          <FormInput
+            id="email"
+            name="email"
+            required
+            placeholder="steve@lifeaquatic.com"
+            type="email"
+            autocomplete="email"
+          />
         </FormField>
 
         <FormField>
           <FormLabel for="company">Company</FormLabel>
-          <FormInput id="company" name="company" required placeholder="The Life Aquatic" type="text" />
+          <FormInput
+            id="company"
+            name="company"
+            required
+            placeholder="The Life Aquatic"
+            type="text"
+            autocomplete="organization"
+          />
         </FormField>
 
         <FormField>
           <FormLabel for="phone">Phone</FormLabel>
-          <FormInput id="phone" name="phone" inputmode="numeric" placeholder="(888) 490-7894" />
+          <FormInput
+            id="phone"
+            name="phone"
+            inputmode="numeric"
+            placeholder="(888) 490-7894"
+            autocomplete="tel-national"
+          />
         </FormField>
 
         <FormField>
@@ -114,7 +135,7 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
         </div>
 
         <input type="hidden" name="meta" id="meta" />
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJN3VjuceAYMzev"></div>
+        <div id="turnstile-widget" transition:persist></div>
         <Button size="lg">Send Message</Button>
         <p
           id="submit-message"
@@ -154,6 +175,17 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
 <script>
   const form = document.getElementById("contact");
   const msg = document.getElementById("submit-message");
+  const meta = document.getElementById("meta");
+  if (meta instanceof HTMLInputElement) {
+    meta.value = JSON.stringify({
+      url: window.location.href,
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      doNotTrack: navigator.doNotTrack,
+      cookieEnabled: navigator.cookieEnabled,
+    });
+  }
 
   if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
     form.addEventListener("submit", (e) => {
@@ -190,16 +222,10 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
   }
 </script>
 
-<script>
-  const meta = document.getElementById("meta");
-  if (meta instanceof HTMLInputElement) {
-    meta.value = JSON.stringify({
-      url: window.location.href,
-      referrer: document.referrer,
-      userAgent: navigator.userAgent,
-      language: navigator.language,
-      doNotTrack: navigator.doNotTrack,
-      cookieEnabled: navigator.cookieEnabled,
+<script is:inline>
+  function _turnstileCb() {
+    turnstile.render("#turnstile-widget", {
+      sitekey: import.meta.env.TURNSTILE_SITEKEY,
     });
   }
 </script>

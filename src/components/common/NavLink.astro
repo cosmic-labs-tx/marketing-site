@@ -7,8 +7,8 @@ type Props = HTMLAttributes<"a"> & {
 
 const { href, class: className, ...rest } = Astro.props;
 const url = new URL(Astro.request.url);
-const currentPath = new URL(Astro.request.url).pathname;
-const isActive = href === currentPath;
+const currentPath = Astro.url.pathname;
+const isActive = href === currentPath || href === `${currentPath}/`;
 ---
 
 <a
