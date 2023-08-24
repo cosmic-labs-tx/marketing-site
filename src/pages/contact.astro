@@ -222,10 +222,14 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
   }
 </script>
 
-<script is:inline>
-  function _turnstileCb() {
+<script>
+  declare global {
+    const turnstile: any;
+  }
+
+  window._turnstileCb = () => {
     turnstile.render("#turnstile-widget", {
       sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
     });
-  }
+  };
 </script>

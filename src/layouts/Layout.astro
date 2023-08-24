@@ -14,7 +14,6 @@ type Props = {
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
 const {
   meta: { title, description },
 } = Astro.props;
@@ -44,6 +43,8 @@ const {
     />
 
     <script
+      async
+      defer
       type="text/partytown"
       src="https://analytics.umami.is/script.js"
       data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
