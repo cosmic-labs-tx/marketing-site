@@ -1,7 +1,7 @@
 export const topNavLinks = [
   { href: "/", label: "Home" },
-  { href: "/#services", label: "Services" },
-  { href: "/#pricing", label: "Pricing" },
+  { href: "#services", label: "Services" },
+  { href: "#pricing", label: "Pricing" },
   { href: "/schedule-call", label: "Schedule Call" },
   { href: "/contact", label: "Contact" },
 ];

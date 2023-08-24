@@ -72,59 +72,55 @@ const { sticky } = Astro.props;
 
 <script>
   import { animate } from "motion";
-  const mobileMenu = document.getElementById("mobile-menu");
-  const mobileMenuNavItems = document.querySelectorAll("#mobile-menu a");
-  const openMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Open Menu']");
-  const closeMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Close Menu']");
+  document.addEventListener("astro:load", () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuNavItems = document.querySelectorAll("#mobile-menu a");
+    const openMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Open Menu']");
+    const closeMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Close Menu']");
 
-  function openNav() {
-    if (!mobileMenu) return;
-    document.body.style.overflow = "hidden";
-    mobileMenu.classList.remove("hidden");
+    function openNav() {
+      if (!mobileMenu) return;
+      document.body.style.overflow = "hidden";
+      mobileMenu.classList.remove("hidden");
 
-    animate(
-      mobileMenu,
-      {
-        transform: ["translateY(-5%)", "translateY(0)"],
-        opacity: [0, 1],
-      },
-      { duration: 0.3 }
-    );
-  }
+      animate(
+        mobileMenu,
+        {
+          transform: ["translateY(-5%)", "translateY(0)"],
+          opacity: [0, 1],
+        },
+        { duration: 0.3 }
+      );
+    }
 
-  function closeNav() {
-    if (!mobileMenu) return;
-    document.body.style.overflow = "auto";
+    function closeNav() {
+      if (!mobileMenu) return;
+      document.body.style.overflow = "auto";
 
-    animate(
-      mobileMenu,
-      {
-        opacity: [1, 0],
-      },
-      { duration: 0.2 }
-    ).finished.then(() => {
-      mobileMenu.classList.add("hidden");
-    });
-  }
+      animate(mobileMenu, { opacity: [1, 0] }, { duration: 0.2 }).finished.then(() => {
+        mobileMenu.classList.add("hidden");
+      });
+    }
 
-  if (openMenuButton) {
-    openMenuButton.addEventListener("click", () => {
-      closeMenuButton?.focus();
-      openNav();
-    });
-  }
+    if (openMenuButton) {
+      openMenuButton.addEventListener("click", () => {
+        closeMenuButton?.focus();
+        openNav();
+      });
+    }
 
-  if (closeMenuButton) {
-    closeMenuButton.addEventListener("click", () => {
-      closeNav();
-    });
-  }
-
-  if (mobileMenuNavItems) {
-    mobileMenuNavItems.forEach((item) => {
-      item.addEventListener("click", () => {
+    if (closeMenuButton) {
+      closeMenuButton.addEventListener("click", () => {
         closeNav();
       });
-    });
-  }
+    }
+
+    if (mobileMenuNavItems) {
+      mobileMenuNavItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          closeNav();
+        });
+      });
+    }
+  });
 </script>

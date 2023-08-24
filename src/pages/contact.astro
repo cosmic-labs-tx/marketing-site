@@ -28,7 +28,7 @@ const meta = {
         id="contact"
         action={`${import.meta.env.PUBLIC_ADMIN_URL}/create-lead`}
         method="post"
-        class="fade-in-section max-w-md space-y-4"
+        class="max-w-md space-y-5"
       >
         <FormField>
           <FormLabel for="name">Name</FormLabel>
@@ -96,9 +96,13 @@ const meta = {
         </div>
 
         <input type="hidden" name="meta" id="meta" />
-
-        <Button size="lg">Get Started</Button>
-        <p id="submit-message" class="mt-2" style="opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out;">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJN3VjuceAYMzev"></div>
+        <Button size="lg">Send Message</Button>
+        <p
+          id="submit-message"
+          class="mt-2 font-semibold"
+          style="opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out;"
+        >
         </p>
       </form>
     </div>
@@ -152,7 +156,7 @@ const meta = {
             msg.style.color = "var(--color-success)";
             msg.textContent = "Thanks for reaching out! We'll be in touch soon.";
           } else {
-            msg.style.color = "var(--color-destructive)";
+            msg.style.color = "hsl(var(--destructive))";
             msg.textContent = "Something went wrong. Please try again.";
           }
         })
@@ -160,7 +164,7 @@ const meta = {
           console.error(err);
           msg.style.opacity = "1";
           msg.style.visibility = "visible";
-          msg.style.color = "var(--color-destructive)";
+          msg.style.color = "hsl(var(--destructive))";
           msg.textContent = "Something went wrong. Please try again.";
         });
     });
@@ -170,7 +174,6 @@ const meta = {
 <script>
   const meta = document.getElementById("meta");
   if (meta instanceof HTMLInputElement) {
-    console.log("meta not found");
     meta.value = JSON.stringify({
       url: window.location.href,
       referrer: document.referrer,
