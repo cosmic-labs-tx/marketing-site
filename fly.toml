@@ -4,10 +4,6 @@ primary_region = "dfw"
 [build]
 dockerfile = "./Dockerfile"
 
-[build.args]
-PUBLIC_TURNSTILE_SITEKEY="0x4AAAAAAAJN3VjuceAYMzev"
-PUBLIC_UMAMI_WEBSITE_ID="9e145e29-b825-4715-bd63-c4a68fca0828"
-
 [http_service]
 internal_port = 8043
 force_https = true
