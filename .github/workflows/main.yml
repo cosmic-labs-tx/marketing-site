@@ -32,7 +32,7 @@ jobs:
       - name: 🧪 Test
         uses: cypress-io/github-action@v5
         with:
-          build: npm run build
+          build: SITEMAP=false npm run build
           start: npm run preview
   deploy:
     name: 🚀 Deploy

@@ -1,6 +1,6 @@
 ---
-import Container from "~/components/common/Container.astro";
 import Button from "~/components/common/Button.astro";
+import Container from "~/components/common/Container.astro";
 import NavLink from "~/components/common/NavLink.astro";
 import { COMPANY_NAME } from "~/config";
 import { topNavLinks } from "~/constants";
@@ -40,7 +40,7 @@ const { sticky } = Astro.props;
 
     <!-- Mobile -->
     <nav class="z-[1] ml-auto md:hidden">
-      <Button style="outline" aria-label="Open Menu">Menu</Button>
+      <Button id="open-mobile-menu" style="outline" aria-label="Open Menu">Menu</Button>
       <!-- Drawer -->
       <div
         id="mobile-menu"
@@ -49,7 +49,7 @@ const { sticky } = Astro.props;
         class="fixed inset-x-0 top-0 hidden h-screen w-full translate-y-[-5%] transform-gpu bg-white p-6 shadow-xl will-change-transform sm:hidden"
       >
         <div class="flex justify-end">
-          <Button style="outline" class="w-min" aria-label="Close Menu">Close</Button>
+          <Button id="close-mobile-menu" style="outline" class="w-min" aria-label="Close Menu">Close</Button>
         </div>
         <h2 id="mobile-menu-title" class="sr-only">Navigation Links</h2>
         <ul class="mt-8 flex flex-col items-center gap-12 border-t border-gray-200 pt-8">
@@ -72,16 +72,29 @@ const { sticky } = Astro.props;
 
 <script>
   import { animate } from "motion";
-  document.addEventListener("astro:load", () => {
+  setupListeners();
+
+  // Runs again on view transition page navigations
+  document.addEventListener("astro:beforeload", setupListeners);
+
+  function setupListeners() {
     const mobileMenu = document.getElementById("mobile-menu");
     const mobileMenuNavItems = document.querySelectorAll("#mobile-menu a");
-    const openMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Open Menu']");
-    const closeMenuButton: HTMLButtonElement | null = document.querySelector("[aria-label='Close Menu']");
+    const openMenuButton = document.getElementById("open-mobile-menu") as HTMLButtonElement | null;
+    const closeMenuButton = document.getElementById("close-mobile-menu") as HTMLButtonElement | null;
+
+    openMenuButton?.addEventListener("click", openNav);
+    closeMenuButton?.addEventListener("click", closeNav);
+
+    mobileMenuNavItems?.forEach((item) => {
+      item.addEventListener("click", closeNav);
+    });
 
     function openNav() {
       if (!mobileMenu) return;
       document.body.style.overflow = "hidden";
       mobileMenu.classList.remove("hidden");
+      closeMenuButton?.focus();
 
       animate(
         mobileMenu,
@@ -101,26 +114,5 @@ const { sticky } = Astro.props;
         mobileMenu.classList.add("hidden");
       });
     }
-
-    if (openMenuButton) {
-      openMenuButton.addEventListener("click", () => {
-        closeMenuButton?.focus();
-        openNav();
-      });
-    }
-
-    if (closeMenuButton) {
-      closeMenuButton.addEventListener("click", () => {
-        closeNav();
-      });
-    }
-
-    if (mobileMenuNavItems) {
-      mobileMenuNavItems.forEach((item) => {
-        item.addEventListener("click", () => {
-          closeNav();
-        });
-      });
-    }
-  });
+  }
 </script>
