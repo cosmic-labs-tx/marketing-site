@@ -13,8 +13,6 @@ const isActive = href === currentPath || `${href}/` === currentPath;
 
 <a
   data-name="nav-link"
-  data-currenturl={url}
-  data-currentpath={currentPath}
   class:list={cn(
     isActive
       ? "border-accent text-accent focus-visible:outline-accent"
