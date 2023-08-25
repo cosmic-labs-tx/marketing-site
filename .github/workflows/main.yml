@@ -31,8 +31,10 @@ jobs:
 
       - name: 🧪 Test
         uses: cypress-io/github-action@v5
+        env:
+          SITEMAP: "false"
         with:
-          build: SITEMAP=false npm run build
+          build: npm run build
           start: npm run preview
   deploy:
     name: 🚀 Deploy
