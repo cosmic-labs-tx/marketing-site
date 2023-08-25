@@ -18,16 +18,30 @@ const meta = {
     "Connect with us at Friendly Bear Labs. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!",
 };
 
+// Create a date object for the current time in Central Time (CT)
 const now = new Date();
-const currentTime = now.getHours();
-const isWeekend = now.getDay() === 0 || now.getDay() === 6;
-const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today" : "tomorrow";
+const ctTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+
+// Get the hour of the day in Central Time
+const ctHour = ctTime.getHours();
+
+// Determine the day and time for hearing back
+let hearBack;
+if (ctHour < LATEST_REPLY_HOUR) {
+  hearBack = "today";
+} else {
+  const tomorrow = new Date(ctTime);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
+}
 ---
 
 <Layout meta={meta}>
-  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb" async defer
-  ></script>
-
+  <script
+    slot="head"
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb&render=explicit"
+    async
+    defer></script>
   <Container class="space-y-8">
     <div>
       <PageTitle>Let's work together</PageTitle>
@@ -135,7 +149,7 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
         </div>
 
         <input type="hidden" name="meta" id="meta" />
-        <div id="turnstile-widget" transition:persist></div>
+        <div class="h-[65px] w-[300px]" id="turnstile-widget" transition:persist></div>
         <Button size="lg">Send Message</Button>
         <p
           id="submit-message"
@@ -148,88 +162,15 @@ const hearBack = isWeekend ? "Monday" : currentTime < LATEST_REPLY_HOUR ? "today
   </Container>
 </Layout>
 
+<script src="~/scripts/contact-form.ts"></script>
 <script>
-  const attribution = document.getElementById("attribution") as HTMLSelectElement | null;
-  const attributionOther = document.getElementById("attribution-other") as HTMLDivElement | null;
-  const attributionOtherLabel = document.getElementById("attribution-other-label") as HTMLLabelElement | null;
-
-  if (attribution && attributionOther) {
-    attribution.addEventListener("change", (e) => {
-      if (!(e.target instanceof HTMLSelectElement) || !(attributionOtherLabel instanceof HTMLLabelElement)) {
-        console.log("hi", e.target, attributionOtherLabel);
-        return;
-      }
-
-      if (e.target.value === "OTHER" || e.target.value === "REFERRAL") {
-        attributionOther.classList.add("flex");
-        attributionOther.classList.remove("hidden");
-        attributionOtherLabel.textContent = e.target.value === "OTHER" ? "Other" : "Who Referred You?";
-      } else {
-        attributionOther.classList.remove("flex");
-        attributionOther.classList.add("hidden");
-      }
-    });
-  }
-</script>
-
-<script>
-  const form = document.getElementById("contact");
-  const msg = document.getElementById("submit-message");
-  const meta = document.getElementById("meta");
-  if (meta instanceof HTMLInputElement) {
-    meta.value = JSON.stringify({
-      url: window.location.href,
-      referrer: document.referrer,
-      userAgent: navigator.userAgent,
-      language: navigator.language,
-      doNotTrack: navigator.doNotTrack,
-      cookieEnabled: navigator.cookieEnabled,
-    });
-  }
-
-  if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      console.log(Object.fromEntries(formData));
-      fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      })
-        .then((res) => {
-          msg.style.opacity = "1";
-          msg.style.visibility = "visible";
-          if (res.ok) {
-            form.reset();
-            msg.style.color = "var(--color-success)";
-            msg.textContent = "Thanks for reaching out! We'll be in touch soon.";
-          } else {
-            msg.style.color = "hsl(var(--destructive))";
-            msg.textContent = "Something went wrong. Please try again.";
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          msg.style.opacity = "1";
-          msg.style.visibility = "visible";
-          msg.style.color = "hsl(var(--destructive))";
-          msg.textContent = "Something went wrong. Please try again.";
-        });
-    });
-  }
-</script>
-
-<script>
-  declare global {
-    const turnstile: any;
-  }
-
-  window._turnstileCb = () => {
-    turnstile.render("#turnstile-widget", {
-      sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
-    });
-  };
+  (function renderTurnstile() {
+    window._turnstileCb = () => {
+      const id = window.turnstile.render("#turnstile-widget", {
+        sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
+        theme: "auto",
+      });
+      window._turnstile_widget_id = id;
+    };
+  })();
 </script>
