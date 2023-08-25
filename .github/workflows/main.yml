@@ -42,6 +42,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --build-arg PUBLIC_TURNSTILE_SITEKEY=${{ vars.PUBLIC_TURNSTILE_SITE_KEY }},PUBLIC_UMAMI_WEBSITE_ID=${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
+      - run: flyctl deploy --remote-only --build-arg "PUBLIC_TURNSTILE_SITEKEY=${{ vars.PUBLIC_TURNSTILE_SITE_KEY }},PUBLIC_UMAMI_WEBSITE_ID=${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
