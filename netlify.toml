@@ -5,7 +5,7 @@
     X-XSS-Protection ='''1,
     mode=block'''
     Content-Security-Policy = '''
-    default-src 'none',
+    default-src 'self',
     script-src 'self' https://analytics.umami.is https://challenges.cloudflare.com 'unsafe-inline',
     connect-src 'self',
     img-src 'self',
