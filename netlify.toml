@@ -1,0 +1,22 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection ='''1,
+    mode=block'''
+    Content-Security-Policy = '''
+    default-src 'none',
+    script-src 'self',
+    connect-src 'self',
+    img-src 'self',
+    style-src 'self',
+    '''
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+  for = "/*.woff2"
+  [headers.values]
+    cache-control = '''
+    max-age=31536000,
+    public'''
+
