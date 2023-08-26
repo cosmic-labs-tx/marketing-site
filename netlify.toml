@@ -6,7 +6,7 @@
     mode=block'''
     Content-Security-Policy = '''
     default-src 'none',
-    script-src 'self',
+    script-src 'self' https://analytics.umami.is https://challenges.cloudflare.com 'unsafe-inline',
     connect-src 'self',
     img-src 'self',
     style-src 'self',
@@ -14,9 +14,9 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+[[headers]]
   for = "/*.woff2"
   [headers.values]
     cache-control = '''
     max-age=31536000,
     public'''
-
