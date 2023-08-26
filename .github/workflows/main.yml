@@ -1,6 +1,5 @@
-name: 🛠️ Build & Deploy
+name: ⬥ Deploy
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -8,42 +7,26 @@ env:
   NODE_VERSION: 18.17.0
 
 jobs:
-  build:
-    name: ⚙ Build & Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇ Checkout code
-        uses: actions/checkout@v3
-
-      - name: ⬡ Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "${{ env.NODE_VERSION }}"
-
-      - name: 💿 Install dependencies
-        run: npm ci
-
-      - name: ʦ TypeScript
-        run: npm run typecheck --if-present
-
-      - name: ⬣ Lint
-        run: npm run lint
-
-      - name: 🧪 Test
-        uses: cypress-io/github-action@v5
-        env:
-          SITEMAP: "false"
-        with:
-          build: npm run build
-          start: npm run preview
   deploy:
     name: 🚀 Deploy
-    needs: build
-    if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --build-arg PUBLIC_TURNSTILE_SITEKEY=${{ vars.PUBLIC_TURNSTILE_SITE_KEY }} --build-arg PUBLIC_UMAMI_WEBSITE_ID=${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
+      - name: ↧ Checkout code
+        uses: actions/checkout@v3
+
+      - name: ⬣ Install dependencies
+        run: npm ci
+
+      - name: 🛠️ Build site
+        run: npm run build
+
+      - name: 🚀 Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0.0
+        with:
+          publish-dir: ./dist
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-pull-request-comment: true
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
