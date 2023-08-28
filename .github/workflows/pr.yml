@@ -14,7 +14,20 @@ jobs:
   test:
     name: 🧪 Test
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
+      - name: Comment deploy status
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-id: cloudflare-deploy
+          message: |
+            ### <span aria-hidden="true">🚧</span> Deploy Preview building...
+
+            |  Name | Link |
+            |---------------------------------|------------------------|
+            |<span aria-hidden="true">🔨</span> Latest commit | ${{ github.sha }} |
+            |<span aria-hidden="true">🔍</span> Latest deploy log | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} |
+            ---
       - name: ↧ Checkout code
         uses: actions/checkout@v3
 
@@ -44,15 +57,8 @@ jobs:
     name: ⚡️ Deploy
     needs: test
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
-      - name: Write build PR comment
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            :gear: The PR is being built...
-          comment_tag: to_delete
-          mode: delete
-
       - name: ↧ Checkout code
         uses: actions/checkout@v3
 
@@ -82,8 +88,9 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Comment deploy url
-        uses: thollander/actions-comment-pull-request@v2.4.2
+        uses: mshick/add-pr-comment@v2
         with:
+          message-id: cloudflare-deploy
           message: |
             ### <span aria-hidden="true">✅</span> Deploy Preview ready!
 
@@ -94,4 +101,3 @@ jobs:
             |<span aria-hidden="true">⚡️</span> Deploy Preview Url | [${{ steps.cloudflare-deploy.outputs.alias }}](${{ steps.cloudflare-deploy.outputs.alias }}) |
             |<span aria-hidden="true">🌳</span> Environment | ${{ steps.cloudflare-deploy.outputs.environment }} |
             ---
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
