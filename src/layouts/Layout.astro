@@ -24,6 +24,10 @@ const {
   <head>
     <title>{title} • {SITE_TITLE}</title>
 
+    <meta
+      name="git"
+      content={`branch: ${import.meta.env.PUBLIC_GIT_BRANCH} / commit: ${import.meta.env.PUBLIC_GIT_COMMIT_SHA}`}
+    />
     <meta name="author" content="Friendly Bear Labs" />
     <meta name="description" content={description} />
     <meta charset="UTF-8" />

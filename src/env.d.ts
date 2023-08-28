@@ -16,6 +16,8 @@ declare global {
   interface ImportMetaEnv {
     readonly PUBLIC_TURNSTILE_SITEKEY: string;
     readonly PUBLIC_UMAMI_WEBSITE_ID: string;
+    readonly PUBLIC_GIT_BRANCH: string;
+    readonly PUBLIC_GIT_COMMIT_SHA: string;
   }
 
   interface ImportMeta {
