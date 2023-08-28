@@ -21,16 +21,17 @@ jobs:
 
       - name: 🛠️ Build site
         run: npm run build
+        env:
+          PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
+          PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
 
       - name: ☁️ Publish to Cloudflare
         uses: cloudflare/pages-action@v1.5.0
         with:
+          directory: dist
+          wranglerVersion: "3"
+          branch: ${{ github.ref_name}}
+          projectName: fbl-marketing-site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: fbl-marketing-site
-          directory: dist
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
-          wranglerVersion: "3"
