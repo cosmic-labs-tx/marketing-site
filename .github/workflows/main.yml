@@ -20,15 +20,15 @@ jobs:
       - name: 🛠️ Build site
         run: npm run build
 
-      - name: 🚀 Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0.0
+      - name: ☁️ Publish to Cloudflare
+        uses: cloudflare/pages-action@v1.5.0
         with:
-          publish-dir: ./dist
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          enable-pull-request-comment: true
-          netlify-config-path: ./netlify.toml
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: fbl-marketing-site
+          directory: dist
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
+          wranglerVersion: "3"
