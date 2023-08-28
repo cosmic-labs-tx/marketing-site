@@ -11,6 +11,7 @@ jobs:
   deploy:
     name: ⚡️ Deploy
     runs-on: ubuntu-latest
+    environment: fbl-marketing-site (Production)
     steps:
       - name: ↧ Checkout code
         uses: actions/checkout@v3
