@@ -8,3 +8,6 @@
 
 /*.woff2
   cache-control: "max-age=31536000, public"
+
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
