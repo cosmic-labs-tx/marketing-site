@@ -1,0 +1,103 @@
+# git hub action for pull requests
+
+name: ⛙ Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 18.17.0
+
+jobs:
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Comment deploy status
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-id: cloudflare-deploy
+          message: |
+            ### <span aria-hidden="true">🚧</span> Deploy Preview building...
+
+            |  Name | Link |
+            |---------------------------------|------------------------|
+            |<span aria-hidden="true">🔨</span> Latest commit | ${{ github.sha }} |
+            |<span aria-hidden="true">🔍</span> Latest deploy log | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} |
+            ---
+      - name: ↧ Checkout code
+        uses: actions/checkout@v3
+
+      - name: ⬣ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: ⬣ Install dependencies
+        run: npm ci
+
+      - name: ʦ TypeScript
+        run: npm run typecheck --if-present
+
+      - name: ⬣ Lint
+        run: npm run lint
+
+      - name: 🧪 Test
+        uses: cypress-io/github-action@v5
+        env:
+          SITEMAP: "false"
+        with:
+          build: npm run build
+          start: npm run preview
+
+  deploy:
+    name: ⚡️ Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: ↧ Checkout code
+        uses: actions/checkout@v3
+
+      - name: ⬣ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: ⬣ Install dependencies
+        run: npm ci
+
+      - name: 🛠️ Build site
+        run: npm run build
+        env:
+          PUBLIC_GIT_BRANCH: ${{ env.PUBLIC_GIT_BRANCH }}
+          PUBLIC_GIT_COMMIT_SHA: ${{ env.PUBLIC_GIT_COMMIT_SHA }}
+
+      - name: ☁️ Deploy to Cloudflare
+        uses: cloudflare/pages-action@v1.5.0
+        id: cloudflare-deploy
+        with:
+          directory: dist
+          wranglerVersion: "3"
+          projectName: fbl-marketing-site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Comment deploy url
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-id: cloudflare-deploy
+          message: |
+            ### <span aria-hidden="true">✅</span> Deploy Preview ready!
+
+            |  Name | Link |
+            |---------------------------------|------------------------|
+            |<span aria-hidden="true">🔨</span> Latest commit | ${{ github.sha }} |
+            |<span aria-hidden="true">🔍</span> Latest deploy log | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} |
+            |<span aria-hidden="true">⚡️</span> Deploy Preview Url | [${{ steps.cloudflare-deploy.outputs.alias }}](${{ steps.cloudflare-deploy.outputs.alias }}) |
+            |<span aria-hidden="true">🌳</span> Environment | ${{ steps.cloudflare-deploy.outputs.environment }} |
+            ---
