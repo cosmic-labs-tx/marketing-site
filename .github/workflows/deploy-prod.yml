@@ -1,10 +1,10 @@
-name: ⚡️ Deploy
+name: ⚡️ Deploy Production
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-      - staging
 
 env:
   NODE_VERSION: 18.17.0
@@ -15,6 +15,7 @@ jobs:
   deploy:
     name: ⚡️ Deploy
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: ↧ Checkout code
         uses: actions/checkout@v3
