@@ -10,6 +10,7 @@ env:
   NODE_VERSION: 18.17.0
   PUBLIC_GIT_BRANCH: ${{ github.ref_name }}
   PUBLIC_GIT_COMMIT_SHA: ${{ github.sha }}
+
 jobs:
   deploy:
     name: ⚡️ Deploy
@@ -29,13 +30,13 @@ jobs:
       - name: 🛠️ Build site
         run: npm run build
 
-      - name: ☁️ Publish to Cloudflare
+      - name: ☁️ Deploy to Cloudflare
         uses: cloudflare/pages-action@v1.5.0
         with:
           directory: dist
           wranglerVersion: "3"
           branch: ${{ github.ref_name }}
+          projectName: fbl-marketing-site
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: fbl-marketing-site
