@@ -10,6 +10,7 @@ env:
   NODE_VERSION: 18.17.0
   PUBLIC_GIT_BRANCH: ${{ github.ref_name }}
   PUBLIC_GIT_COMMIT_SHA: ${{ github.sha }}
+  PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
 
 jobs:
   deploy:
