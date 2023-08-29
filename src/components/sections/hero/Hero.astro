@@ -1,0 +1,37 @@
+---
+import Button from "~/components/common/Button.astro";
+import ButtonGroup from "~/components/common/ButtonGroup.astro";
+import Container from "~/components/common/Container.astro";
+---
+
+<section id="hero" class="w-full pb-48">
+  <Container class="space-y-5 sm:space-y-8">
+    <h1 class="max-w-xl text-5xl font-bold sm:text-6xl lg:max-w-4xl lg:text-8xl">We Get Small Businesses Online</h1>
+    <p class="max-w-lg text-xl sm:text-2xl">
+      Meet the friendliest <strong class="text-accent">web agency</strong> in town. Our team specializes in crafting
+      websites for <strong class="text-accent">small businesses</strong>, giving you a strong online presence to <strong
+        class="text-accent">grow and adapt</strong
+      > and delighting your customers along the way.
+    </p>
+    <ButtonGroup class="flex flex-col items-center gap-4 sm:flex-row">
+      <Button as="a" href="/schedule-call" size="lg">Let's Talk</Button>
+      <Button as="a" href="/contact" style="outline" size="lg" class="backdrop-blur-md">Send a message</Button>
+    </ButtonGroup>
+  </Container>
+</section>
+
+<style>
+  #hero {
+    background-image: url("/waves.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom 4rem;
+    background-size: 100%;
+    background-attachment: scroll;
+  }
+
+  @media (min-width: 1024px) {
+    #hero {
+      background-position: center bottom -9vw;
+    }
+  }
+</style>

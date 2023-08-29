@@ -1,0 +1,118 @@
+---
+import Button from "~/components/common/Button.astro";
+import Container from "~/components/common/Container.astro";
+import NavLink from "~/components/common/NavLink.astro";
+import { COMPANY_NAME } from "~/config";
+import { topNavLinks } from "~/constants";
+import { cn } from "~/lib/utils";
+
+type Props = {
+  sticky?: boolean;
+};
+
+const { sticky } = Astro.props;
+---
+
+<header
+  class={cn(
+    "flex h-[--header-height] min-h-[--header-height] items-center bg-white",
+    sticky ? "sticky inset-x-0 top-0 z-10" : ""
+  )}
+>
+  <Container class="flex h-10 w-full items-center">
+    <span class="font-black">{COMPANY_NAME}</span>
+    <!-- Desktop -->
+    <div class="ml-auto hidden md:block">
+      <ul class="flex flex-wrap gap-8">
+        {
+          topNavLinks.map(({ href, label }) => {
+            return (
+              <li>
+                <NavLink class="py-2" href={href}>
+                  {label}
+                </NavLink>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+
+    <!-- Mobile -->
+    <nav class="z-[1] ml-auto md:hidden">
+      <Button id="open-mobile-menu" style="outline" aria-label="Open Menu">Menu</Button>
+      <!-- Drawer -->
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-labelledby="mobile-menu-title"
+        class="fixed inset-x-0 top-0 hidden h-screen w-full translate-y-[-5%] transform-gpu bg-white p-6 shadow-xl will-change-transform sm:hidden"
+      >
+        <div class="flex justify-end">
+          <Button id="close-mobile-menu" style="outline" class="w-min" aria-label="Close Menu">Close</Button>
+        </div>
+        <h2 id="mobile-menu-title" class="sr-only">Navigation Links</h2>
+        <ul class="mt-8 flex flex-col items-center gap-12 border-t border-gray-200 pt-8">
+          {
+            topNavLinks.map(({ href, label }) => {
+              return (
+                <li>
+                  <NavLink class="py-2 text-center text-xl font-bold" href={href}>
+                    {label}
+                  </NavLink>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </nav>
+  </Container>
+</header>
+
+<script>
+  import { animate } from "motion";
+  setupListeners();
+
+  // Runs again on view transition page navigations
+  document.addEventListener("astro:beforeload", setupListeners);
+
+  function setupListeners() {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuNavItems = document.querySelectorAll("#mobile-menu a");
+    const openMenuButton = document.getElementById("open-mobile-menu") as HTMLButtonElement | null;
+    const closeMenuButton = document.getElementById("close-mobile-menu") as HTMLButtonElement | null;
+
+    openMenuButton?.addEventListener("click", openNav);
+    closeMenuButton?.addEventListener("click", closeNav);
+
+    mobileMenuNavItems?.forEach((item) => {
+      item.addEventListener("click", closeNav);
+    });
+
+    function openNav() {
+      if (!mobileMenu) return;
+      document.body.style.overflow = "hidden";
+      mobileMenu.classList.remove("hidden");
+      closeMenuButton?.focus();
+
+      animate(
+        mobileMenu,
+        {
+          transform: ["translateY(-5%)", "translateY(0)"],
+          opacity: [0, 1],
+        },
+        { duration: 0.3 }
+      );
+    }
+
+    function closeNav() {
+      if (!mobileMenu) return;
+      document.body.style.overflow = "auto";
+
+      animate(mobileMenu, { opacity: [1, 0] }, { duration: 0.2 }).finished.then(() => {
+        mobileMenu.classList.add("hidden");
+      });
+    }
+  }
+</script>

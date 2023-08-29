@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://friendlybearlabs.com/sitemap-index.xml

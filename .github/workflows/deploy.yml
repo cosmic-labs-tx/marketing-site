@@ -1,0 +1,40 @@
+name: ⚡️ Deploy Production
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+env:
+  NODE_VERSION: 18.17.0
+
+jobs:
+  deploy:
+    name: ⚡️ Deploy
+    runs-on: ubuntu-latest
+    environment: fbl-marketing-site (Production)
+    steps:
+      - name: List environment variables
+        run: env
+
+      - name: ↧ Checkout code
+        uses: actions/checkout@v3
+
+      - name: ⬣ Install dependencies
+        run: npm ci
+
+      - name: 🛠️ Build site
+        run: npm run build
+        env:
+          PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
+          PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.PUBLIC_UMAMI_WEBSITE_ID }}
+
+      - name: ☁️ Publish to Cloudflare
+        uses: cloudflare/pages-action@v1.5.0
+        with:
+          directory: dist
+          wranglerVersion: "3"
+          branch: ${{ github.ref_name}}
+          projectName: fbl-marketing-site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

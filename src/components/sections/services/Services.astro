@@ -1,0 +1,22 @@
+---
+import Container from "~/components/common/Container.astro";
+import Section from "~/components/common/Section.astro";
+import SectionSubtitle from "~/components/common/SectionSubtitle.astro";
+import SectionTitle from "~/components/common/SectionTitle.astro";
+import ServiceCard from "~/components/sections/services/ServiceCard.astro";
+import { services } from "~/constants";
+---
+
+<Section id="services" class="bg-bg">
+  <Container class="space-y-24">
+    <div class="mx-auto space-y-6 text-center">
+      <SectionTitle class="text-accent">WHAT WE DO</SectionTitle>
+      <SectionSubtitle class="max-w-sm">Take Your Business to the Next Level</SectionSubtitle>
+    </div>
+    <ul
+      class="flex w-full snap-x snap-mandatory gap-4 overflow-x-auto p-3 sm:grid sm:auto-rows-auto sm:grid-cols-2 sm:gap-16 lg:grid-cols-3"
+    >
+      {services.map((s) => <ServiceCard {...s} />)}
+    </ul>
+  </Container>
+</Section>

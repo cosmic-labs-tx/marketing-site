@@ -1,0 +1,37 @@
+---
+import Container from "~/components/common/Container.astro";
+import Section from "~/components/common/Section.astro";
+import SectionSubtitle from "~/components/common/SectionSubtitle.astro";
+import SectionTitle from "~/components/common/SectionTitle.astro";
+import Addon from "~/components/sections/pricing/Addon.astro";
+import PricingCard from "~/components/sections/pricing/PricingCard.astro";
+import { addons, pricingTiers } from "~/constants";
+---
+
+<Section id="pricing" class="bg-primary text-white">
+  <Container class="flex flex-col items-center justify-between gap-12">
+    <div class="mx-auto space-y-6 text-center">
+      <SectionTitle class="text-accent-light">PRICING</SectionTitle>
+      <SectionSubtitle class="max-w-md">Prices That Make Sense For Small Businesses</SectionSubtitle>
+    </div>
+
+    <div class="isolate mx-auto mt-10 flex flex-col gap-8 lg:flex-row">
+      {pricingTiers.map((t) => <PricingCard {...t} />)}
+    </div>
+
+    <p class="text-xs text-muted-foreground">
+      *Prices displayed are estimates and are subject to change based on final requirements and project parameters
+    </p>
+
+    <div class="w-full">
+      <SectionTitle>ADD-ONS</SectionTitle>
+      <div class="isolate mx-auto mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {addons.map((a) => <Addon {...a} />)}
+      </div>
+    </div>
+
+    <p class="text-center text-lg font-normal">
+      Just need some help with your existing site? We have a flat fee of $75/hr.
+    </p>
+  </Container>
+</Section>

@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "~/lib/utils";
+type Props = HTMLAttributes<"a"> & {
+  href: string;
+};
+
+const { href, class: className, ...rest } = Astro.props;
+const url = new URL(Astro.request.url);
+const currentPath = Astro.url.pathname;
+const isActive = href === currentPath || `${href}/` === currentPath;
+---
+
+<a
+  data-name="nav-link"
+  class:list={cn(
+    isActive
+      ? "border-accent text-accent focus-visible:outline-accent"
+      : "border-transparent focus-visible:outline-primary",
+    "group relative inline-block font-medium transition duration-75 hover:text-accent focus-visible:outline-2",
+    className
+  )}
+  href={href}
+  {...rest}
+>
+  <slot />
+  {
+    isActive && (
+      <div
+        class="absolute inset-x-0 bottom-[-1px] h-[3px] bg-accent group-focus-visible:bg-transparent"
+        transition:name="nav-border"
+        transition:animate="slide"
+      />
+    )
+  }
+</a>

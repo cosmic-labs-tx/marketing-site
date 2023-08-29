@@ -1,0 +1,61 @@
+---
+import PageTitle from "~/components/common/PageTitle.astro";
+import Layout from "~/layouts/Layout.astro";
+
+const meta = {
+  title: "Book Your Discovery Call",
+  description:
+    "Connect with Friendly Bear Labs by scheduling a discovery call. Use our easy calendar tool to reserve your consultation and start your journey toward online success.",
+};
+---
+
+<Layout meta={meta}>
+  <main class="mx-auto h-full w-full max-w-screen-xl px-6 lg:px-0">
+    <PageTitle class="text-center">Schedule a call</PageTitle>
+    <div class="mt-8 h-full min-h-[570px] w-full overflow-scroll md:mt-16" id="my-cal-inline"></div>
+  </main>
+</Layout>
+
+<script is:inline>
+  (function (C, A, L) {
+    let p = function (a, ar) {
+      a.q.push(ar);
+    };
+    let d = C.document;
+    C.Cal =
+      C.Cal ||
+      function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () {
+            p(api, arguments);
+          };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", { origin: "https://app.cal.com" });
+
+  Cal("inline", {
+    elementOrSelector: "#my-cal-inline",
+    calLink: "paulmorris/free-consult",
+    layout: "month_view",
+  });
+
+  Cal("ui", {
+    cssVarsPerTheme: { branding: { brandColor: "#000000" } },
+    hideEventTypeDetails: false,
+    layout: "month_view",
+  });
+</script>

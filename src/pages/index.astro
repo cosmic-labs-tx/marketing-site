@@ -1,0 +1,21 @@
+---
+import FinalCTA from "~/components/sections/FinalCTA.astro";
+import Hero from "~/components/sections/hero/Hero.astro";
+import Pricing from "~/components/sections/pricing/Pricing.astro";
+import Services from "~/components/sections/services/Services.astro";
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout
+  meta={{
+    title: "Empowering Small Businesses",
+    description: "Unlock success with Friendly Bear Labs. Expert web solutions tailored to your needs. Discover more.",
+  }}
+>
+  <main id="main">
+    <Hero />
+    <Services />
+    <Pricing />
+    <FinalCTA />
+  </main>
+</Layout>

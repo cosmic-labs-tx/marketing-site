@@ -1,0 +1,176 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "~/components/common/Button.astro";
+import Container from "~/components/common/Container.astro";
+import PageTitle from "~/components/common/PageTitle.astro";
+import FormField from "~/components/forms/FormField.astro";
+import FormInput from "~/components/forms/FormInput.astro";
+import FormLabel from "~/components/forms/FormLabel.astro";
+import FormRadio from "~/components/forms/FormRadio.astro";
+import FormTextArea from "~/components/forms/FormTextArea.astro";
+import Layout from "~/layouts/Layout.astro";
+import { cn } from "~/lib/utils";
+import { LATEST_REPLY_HOUR } from "~/config";
+
+const meta = {
+  title: "Connect with Us",
+  description:
+    "Connect with us at Friendly Bear Labs. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!",
+};
+
+// Create a date object for the current time in Central Time (CT)
+const now = new Date();
+const ctTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+
+// Get the hour of the day in Central Time
+const ctHour = ctTime.getHours();
+
+// Determine the day and time for hearing back
+let hearBack;
+if (ctHour < LATEST_REPLY_HOUR) {
+  hearBack = "today";
+} else {
+  const tomorrow = new Date(ctTime);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
+}
+---
+
+<Layout meta={meta}>
+  <script
+    slot="head"
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb&render=explicit"
+    async
+    defer></script>
+  <Container class="space-y-8">
+    <div>
+      <PageTitle>Let's work together</PageTitle>
+      <p class="mt-6 text-2xl font-normal">We can't wait to hear from you.</p>
+      <p class="mt-1 flex items-center gap-1 text-sm">
+        <span>We'll respond</span><strong class={cn(hearBack === "today" ? "text-accent" : "text-primary", "font-bold")}
+          >{hearBack}</strong
+        ><Icon
+          class={cn(hearBack === "today" ? "text-accent" : "text-primary")}
+          name={hearBack === "today" ? "tabler:discount-check-filled" : "tabler:calendar-star"}
+        />
+      </p>
+    </div>
+
+    <div>
+      <form
+        id="contact"
+        action={`${import.meta.env.PUBLIC_ADMIN_URL}/create-lead`}
+        method="post"
+        class="max-w-md space-y-5"
+      >
+        <FormField>
+          <FormLabel for="name">Name</FormLabel>
+          <FormInput id="name" name="name" required placeholder="Steve Zissou" type="text" autocomplete="name" />
+        </FormField>
+
+        <FormField>
+          <FormLabel for="email">Email</FormLabel>
+          <FormInput
+            id="email"
+            name="email"
+            required
+            placeholder="steve@lifeaquatic.com"
+            type="email"
+            autocomplete="email"
+          />
+        </FormField>
+
+        <FormField>
+          <FormLabel for="company">Company</FormLabel>
+          <FormInput
+            id="company"
+            name="company"
+            required
+            placeholder="The Life Aquatic"
+            type="text"
+            autocomplete="organization"
+          />
+        </FormField>
+
+        <FormField>
+          <FormLabel for="phone">Phone</FormLabel>
+          <FormInput
+            id="phone"
+            name="phone"
+            inputmode="numeric"
+            placeholder="(888) 490-7894"
+            autocomplete="tel-national"
+          />
+        </FormField>
+
+        <FormField>
+          <FormLabel for="message">Message</FormLabel>
+          <FormTextArea
+            id="message"
+            name="message"
+            required
+            placeholder="I need a new website for my submarine expedition business."
+          />
+        </FormField>
+
+        <fieldset>
+          <legend class="font-bold">Budget</legend>
+          <div class="mt-2 flex flex-col items-start gap-4">
+            <FormRadio name="budget" label="$1,000 - $2,500" value="$1,000 - $2,500" required />
+            <FormRadio name="budget" label="$2,500 - $5,000" value="$2,500 - $5,000" />
+            <FormRadio name="budget" label="$5,000+" value="$5,000+" />
+          </div>
+        </fieldset>
+
+        <div class="border-input w-full border-t"></div>
+
+        <FormField>
+          <FormLabel for="attribution">How did you hear about us?</FormLabel>
+          <select
+            id="attribution"
+            name="attribution"
+            required
+            class="mt-2 block w-full rounded-md border-0 py-3 pl-3 pr-10 ring-1 ring-inset ring-muted-foreground transition focus:ring-2 focus:ring-accent"
+          >
+            <option value="" selected disabled>Choose one</option>
+            <option value="GOOGLE">Google</option>
+            <option value="FACEBOOK">Facebook</option>
+            <option value="INSTAGRAM">Instagram</option>
+            <option value="TWITTER">Twitter</option>
+            <option value="LINKEDIN">LinkedIn</option>
+            <option value="REFERRAL">Referral</option>
+            <option value="OTHER">Other (please specify)</option>
+          </select>
+        </FormField>
+
+        <div id="attribution-other" class="hidden w-full flex-col gap-3">
+          <FormLabel id="attribution-other-label" for="attributionNote" />
+          <FormInput id="attributionNote" name="attributionNote" type="text" />
+        </div>
+
+        <input type="hidden" name="meta" id="meta" />
+        <div class="h-[65px] w-[300px]" id="turnstile-widget" transition:persist></div>
+        <Button size="lg">Send Message</Button>
+        <p
+          id="submit-message"
+          class="mt-2 font-semibold"
+          style="opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out;"
+        >
+        </p>
+      </form>
+    </div>
+  </Container>
+</Layout>
+
+<script src="~/scripts/contact-form.ts"></script>
+<script>
+  (function renderTurnstile() {
+    window._turnstileCb = () => {
+      const id = window.turnstile.render("#turnstile-widget", {
+        sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
+        theme: "auto",
+      });
+      window._turnstile_widget_id = id;
+    };
+  })();
+</script>

@@ -1,0 +1,17 @@
+---
+import { Icon } from "astro-icon/components";
+import type { services } from "~/constants";
+type Props = (typeof services)[number];
+
+const { title, icon, description } = Astro.props;
+---
+
+<li
+  class="flex w-4/5 shrink-0 grow basis-4/5 snap-center flex-col gap-3 rounded-2xl border-2 border-primary/25 px-4 py-20 text-center sm:w-full sm:flex-1 sm:snap-none sm:border-none sm:p-0"
+>
+  <div class="grid place-items-center">
+    <Icon name={icon} class="h-16 w-16 text-primary" />
+  </div>
+  <h3 class="font-medium uppercase tracking-wide text-accent">{title}</h3>
+  <p class="text-lg">{description}</p>
+</li>
