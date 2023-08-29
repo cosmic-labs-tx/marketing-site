@@ -9,31 +9,12 @@ import FormLabel from "~/components/forms/FormLabel.astro";
 import FormRadio from "~/components/forms/FormRadio.astro";
 import FormTextArea from "~/components/forms/FormTextArea.astro";
 import Layout from "~/layouts/Layout.astro";
-import { cn } from "~/lib/utils";
-import { LATEST_REPLY_HOUR } from "~/config";
 
 const meta = {
   title: "Connect with Us",
   description:
     "Connect with us at Friendly Bear Labs. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!",
 };
-
-// Create a date object for the current time in Central Time (CT)
-const now = new Date();
-const ctTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
-
-// Get the hour of the day in Central Time
-const ctHour = ctTime.getHours();
-
-// Determine the day and time for hearing back
-let hearBack;
-if (ctHour < LATEST_REPLY_HOUR) {
-  hearBack = "today";
-} else {
-  const tomorrow = new Date(ctTime);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
-}
 ---
 
 <Layout meta={meta}>
@@ -47,12 +28,12 @@ if (ctHour < LATEST_REPLY_HOUR) {
       <PageTitle>Let's work together</PageTitle>
       <p class="mt-6 text-2xl font-normal">We can't wait to hear from you.</p>
       <p class="mt-1 flex items-center gap-1 text-sm">
-        <span>We'll respond</span><strong class={cn(hearBack === "today" ? "text-accent" : "text-primary", "font-bold")}
-          >{hearBack}</strong
-        ><Icon
-          class={cn(hearBack === "today" ? "text-accent" : "text-primary")}
-          name={hearBack === "today" ? "tabler:discount-check-filled" : "tabler:calendar-star"}
+        <span>We'll respond</span><strong id="hear-back-text" class="font-bold"></strong><Icon
+          id="hear-back-icon-today"
+          class="hidden text-accent"
+          name="tabler:discount-check-filled"
         />
+        <Icon id="hear-back-icon-later" class="hidden" name="tabler:calendar-star" />
       </p>
     </div>
 
@@ -163,14 +144,40 @@ if (ctHour < LATEST_REPLY_HOUR) {
 </Layout>
 
 <script src="~/scripts/contact-form.ts"></script>
+
 <script>
-  (function renderTurnstile() {
-    window._turnstileCb = () => {
-      const id = window.turnstile.render("#turnstile-widget", {
-        sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
-        theme: "auto",
-      });
-      window._turnstile_widget_id = id;
-    };
-  })();
+  import { LATEST_REPLY_HOUR } from "~/config";
+
+  const text = document.querySelector("#hear-back-text") as HTMLElement;
+  const iconToday = document.querySelector("#hear-back-icon-today") as HTMLElement;
+  const iconLater = document.querySelector("#hear-back-icon-later") as HTMLElement;
+
+  const now = new Date();
+  const centralTimeTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+  const centralTimeHour = centralTimeTime.getHours();
+
+  let hearBack;
+  if (centralTimeHour < LATEST_REPLY_HOUR) {
+    hearBack = "today";
+    text.classList.add("text-accent");
+    iconToday.classList.remove("hidden");
+  } else {
+    const tomorrow = new Date(centralTimeTime);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
+    text.classList.add("text-primary");
+    iconLater.classList.remove("hidden");
+  }
+
+  text.innerText = hearBack;
+</script>
+
+<script>
+  window._turnstileCb = () => {
+    const id = window.turnstile.render("#turnstile-widget", {
+      sitekey: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
+      theme: "auto",
+    });
+    window._turnstile_widget_id = id;
+  };
 </script>
