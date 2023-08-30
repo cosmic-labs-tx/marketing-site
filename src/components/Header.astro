@@ -75,7 +75,7 @@ const { sticky } = Astro.props;
   setupListeners();
 
   // Runs again on view transition page navigations
-  document.addEventListener("astro:beforeload", setupListeners);
+  document.addEventListener("astro:after-swap", setupListeners);
 
   function setupListeners() {
     const mobileMenu = document.getElementById("mobile-menu");

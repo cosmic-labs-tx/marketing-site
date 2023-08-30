@@ -15,8 +15,4 @@ export default defineConfig({
     icon({ include: { tabler: ["*"] } }),
     process.env.SITEMAP !== "false" && sitemap(),
   ],
-  experimental: {
-    assets: true,
-    viewTransitions: true,
-  },
 });

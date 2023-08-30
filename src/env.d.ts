@@ -1,5 +1,5 @@
 /// <reference path="../.astro/types.d.ts" />
-/// <reference types="astro/client-image" />
+/// <reference types="astro/client" />
 
 declare global {
   interface Window {
@@ -9,8 +9,8 @@ declare global {
   }
 
   interface DocumentEventMap {
-    "astro:load";
-    "astro:beforeload";
+    "astro:page-load";
+    "astro:after-swap";
   }
 
   interface ImportMetaEnv {

@@ -1,4 +1,4 @@
-document.addEventListener("astro:beforeload", removeTurnstile);
+document.addEventListener("astro:after-swap", removeTurnstile);
 function removeTurnstile() {
   if (window._turnstile_widget_id) {
     window.turnstile.remove(window._turnstile_widget_id);
