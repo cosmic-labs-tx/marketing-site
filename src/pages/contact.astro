@@ -148,28 +148,30 @@ const meta = {
 <script>
   import { LATEST_REPLY_HOUR } from "~/config";
 
-  const text = document.querySelector("#hear-back-text") as HTMLElement;
-  const iconToday = document.querySelector("#hear-back-icon-today") as HTMLElement;
-  const iconLater = document.querySelector("#hear-back-icon-later") as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const text = document.querySelector("#hear-back-text") as HTMLElement;
+    const iconToday = document.querySelector("#hear-back-icon-today") as HTMLElement;
+    const iconLater = document.querySelector("#hear-back-icon-later") as HTMLElement;
 
-  const now = new Date();
-  const centralTimeTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
-  const centralTimeHour = centralTimeTime.getHours();
+    const now = new Date();
+    const centralTimeTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+    const centralTimeHour = centralTimeTime.getHours();
 
-  let hearBack;
-  if (centralTimeHour < LATEST_REPLY_HOUR) {
-    hearBack = "today";
-    text.classList.add("text-accent");
-    iconToday.classList.remove("hidden");
-  } else {
-    const tomorrow = new Date(centralTimeTime);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
-    text.classList.add("text-primary");
-    iconLater.classList.remove("hidden");
-  }
+    let hearBack;
+    if (centralTimeHour < LATEST_REPLY_HOUR) {
+      hearBack = "today";
+      text.classList.add("text-accent");
+      iconToday.classList.remove("hidden");
+    } else {
+      const tomorrow = new Date(centralTimeTime);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      hearBack = tomorrow.getDay() === 0 || tomorrow.getDay() === 6 ? "Monday" : "tomorrow";
+      text.classList.add("text-primary");
+      iconLater.classList.remove("hidden");
+    }
 
-  text.innerText = hearBack;
+    text.innerText = hearBack;
+  });
 </script>
 
 <script>
