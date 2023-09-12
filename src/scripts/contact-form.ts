@@ -1,4 +1,5 @@
 const form = document.getElementById("contact");
+const btn = document.getElementById("submit-btn") as HTMLButtonElement;
 const msg = document.getElementById("submit-message");
 const meta = document.getElementById("meta");
 if (meta instanceof HTMLInputElement) {
@@ -15,6 +16,7 @@ if (meta instanceof HTMLInputElement) {
 if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    btn.disabled = true;
     const formData = new FormData(form);
     fetch(form.action, {
       method: form.method,
@@ -43,6 +45,9 @@ if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
         msg.style.visibility = "visible";
         msg.style.color = "hsl(var(--destructive))";
         msg.textContent = "Something went wrong. Please try again.";
+      })
+      .finally(() => {
+        btn.disabled = false;
       });
   });
 }
