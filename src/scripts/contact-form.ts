@@ -16,7 +16,6 @@ if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    console.log(Object.fromEntries(formData));
     fetch(form.action, {
       method: form.method,
       body: formData,
@@ -24,7 +23,9 @@ if (form instanceof HTMLFormElement && msg instanceof HTMLParagraphElement) {
         Accept: "application/json",
       },
     })
-      .then((res) => {
+      .then(async (res) => {
+        const data = await res.json();
+        console.log(data);
         msg.style.opacity = "1";
         msg.style.visibility = "visible";
         if (res.ok) {
