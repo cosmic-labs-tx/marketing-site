@@ -1,7 +1,7 @@
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: "1; mode=block"
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; connect-src 'self' *friendlybearlabs.com https://analytics.umami.is https://challenges.cloudflare.com; style-src 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; script-src 'self' https://analytics.umami.is https://challenges.cloudflare.com 'unsafe-inline' 'unsafe-eval'; script-src-elem 'self' https://analytics.umami.is https://challenges.cloudflare.com https://app.cal.com 'unsafe-inline'; frame-src 'self' https://challenges.cloudflare.com https://app.cal.com
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; connect-src 'self' https://admin.friendlybearlabs.com https://analytics.umami.is https://challenges.cloudflare.com; style-src 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; script-src 'self' https://analytics.umami.is https://challenges.cloudflare.com 'unsafe-inline' 'unsafe-eval'; script-src-elem 'self' https://analytics.umami.is https://challenges.cloudflare.com https://app.cal.com 'unsafe-inline'; frame-src 'self' https://challenges.cloudflare.com https://app.cal.com
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: "max-age=63072000; includeSubDomains; preload"
