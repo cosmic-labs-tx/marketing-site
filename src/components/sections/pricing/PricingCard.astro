@@ -26,8 +26,11 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
       )
     }
   </div>
-  <p class="mt-4 text-sm leading-6 text-gray-300 contrast-more:text-white">{description}</p>
-  <p class="mt-6 text-4xl font-bold tracking-tight text-white">{price}</p>
+  <p class="mt-4 text-sm leading-6 text-muted-foreground contrast-more:text-white">{description}</p>
+  <p class="mt-6 text-4xl font-bold tracking-tight text-white">
+    {price}
+    <span class="ml-1 text-sm tracking-widest">/mo</span>
+  </p>
   <Button
     as="a"
     style={mostPopular ? "accent" : "outline"}
@@ -37,7 +40,7 @@ const { id, name, price, description, mostPopular, href, features } = Astro.prop
   >
     Book a Call
   </Button>
-  <ul class="mt-8 space-y-3 leading-6 text-gray-300 contrast-more:text-white xl:mt-10">
+  <ul class="mt-8 space-y-3 leading-6 text-muted-foreground contrast-more:text-white xl:mt-10">
     {
       features.map((feature) => (
         <li class="flex gap-x-3">
