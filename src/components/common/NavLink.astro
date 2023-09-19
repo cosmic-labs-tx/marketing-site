@@ -11,6 +11,7 @@ const isActive = href === currentPath || `${href}/` === currentPath;
 ---
 
 <a
+  rel="prefetch-intent"
   data-name="nav-link"
   class:list={cn(
     isActive
