@@ -149,7 +149,10 @@ const meta = {
 <script>
   import { LATEST_REPLY_HOUR } from "~/config";
 
-  document.addEventListener("astro:page-load", () => {
+  calculateResponseTime();
+
+  function calculateResponseTime() {
+    console.log("astro:page-load");
     const text = document.querySelector("#hear-back-text") as HTMLElement;
     const iconToday = document.querySelector("#hear-back-icon-today") as HTMLElement;
     const iconLater = document.querySelector("#hear-back-icon-later") as HTMLElement;
@@ -172,7 +175,9 @@ const meta = {
     }
 
     text.innerText = hearBack;
-  });
+  }
+
+  document.addEventListener("astro:page-load", calculateResponseTime);
 </script>
 
 <script>
