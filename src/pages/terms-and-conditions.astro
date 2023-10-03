@@ -7,8 +7,9 @@ import Layout from "~/layouts/Layout.astro";
 <Layout
   meta={{
     title: "Terms and Conditions",
-    description:
-      "Review Friendly Bear Labs' terms and conditions for our web solutions. Understand our guidelines for usage, services, and responsibilities.",
+    description: `Review ${COMPANY_NAME}${
+      COMPANY_NAME.at(-1) === "s" ? "'" : "'s"
+    } terms and conditions for our web solutions. Understand our guidelines for usage, services, and responsibilities.`,
   }}
 >
   <Container class="space-y-4">

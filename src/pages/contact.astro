@@ -8,12 +8,12 @@ import FormInput from "~/components/forms/FormInput.astro";
 import FormLabel from "~/components/forms/FormLabel.astro";
 import FormRadio from "~/components/forms/FormRadio.astro";
 import FormTextArea from "~/components/forms/FormTextArea.astro";
+import { COMPANY_NAME } from "~/config";
 import Layout from "~/layouts/Layout.astro";
 
 const meta = {
   title: "Connect with Us",
-  description:
-    "Connect with us at Friendly Bear Labs. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!",
+  description: `Connect with us at ${COMPANY_NAME}. Whether you have questions or exciting projects, we're ready to hear from you. Let's create together!`,
 };
 ---
 
@@ -47,31 +47,17 @@ const meta = {
         <input type="hidden" name="clientId" value={import.meta.env.PUBLIC_CLIENT_ID} />
         <FormField>
           <FormLabel for="name">Name</FormLabel>
-          <FormInput id="name" name="name" required placeholder="Steve Zissou" type="text" autocomplete="name" />
+          <FormInput id="name" name="name" required placeholder="Neil A." type="text" autocomplete="name" />
         </FormField>
 
         <FormField>
           <FormLabel for="email">Email</FormLabel>
-          <FormInput
-            id="email"
-            name="email"
-            required
-            placeholder="steve@lifeaquatic.com"
-            type="email"
-            autocomplete="email"
-          />
+          <FormInput id="email" name="email" required placeholder="neil@nasa.com" type="email" autocomplete="email" />
         </FormField>
 
         <FormField>
           <FormLabel for="company">Company</FormLabel>
-          <FormInput
-            id="company"
-            name="company"
-            required
-            placeholder="The Life Aquatic"
-            type="text"
-            autocomplete="organization"
-          />
+          <FormInput id="company" name="company" required placeholder="NASA" type="text" autocomplete="organization" />
         </FormField>
 
         <FormField>
@@ -80,7 +66,7 @@ const meta = {
             id="phone"
             name="phone"
             inputmode="numeric"
-            placeholder="(888) 490-7894"
+            placeholder="(202) 358-0001"
             autocomplete="tel-national"
           />
         </FormField>
@@ -91,7 +77,7 @@ const meta = {
             id="message"
             name="message"
             required
-            placeholder="I need a new website for my submarine expedition business."
+            placeholder="I need a new website for my asteroid mining business."
           />
         </FormField>
 

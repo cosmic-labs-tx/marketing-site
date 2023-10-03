@@ -16,11 +16,16 @@ const { sticky } = Astro.props;
 <header
   class={cn(
     "flex h-[--header-height] min-h-[--header-height] items-center bg-white",
-    sticky ? "sticky inset-x-0 top-0 z-10" : ""
+    sticky && "sticky inset-x-0 top-0 z-10"
   )}
 >
   <Container class="flex h-10 w-full items-center">
-    <a href="/" class="-m-3 p-3 font-black">{COMPANY_NAME}</a>
+    <a href="/" class="-m-3 flex items-center gap-1 p-3 text-2xl font-black tracking-wider">
+      <img src="/images/space.svg" class="h-12 w-12" alt="" />
+      <span>
+        {COMPANY_NAME}
+      </span>
+    </a>
     <!-- Desktop -->
     <div class="ml-auto hidden md:block">
       <ul class="flex flex-wrap gap-8">
@@ -41,12 +46,11 @@ const { sticky } = Astro.props;
     <!-- Mobile -->
     <nav class="z-[1] ml-auto md:hidden">
       <Button id="open-mobile-menu" style="outline" aria-label="Open Menu">Menu</Button>
-      <!-- Drawer -->
       <div
         id="mobile-menu"
         role="dialog"
         aria-labelledby="mobile-menu-title"
-        class="fixed inset-x-0 top-0 hidden h-screen w-full translate-y-[-5%] transform-gpu bg-white p-6 shadow-xl will-change-transform sm:hidden"
+        class="fixed inset-x-0 top-0 hidden h-screen w-full translate-y-[-5%] transform-gpu bg-white p-6 shadow-xl will-change-transform md:hidden"
       >
         <div class="flex justify-end">
           <Button id="close-mobile-menu" style="outline" class="w-min" aria-label="Close Menu">Close</Button>

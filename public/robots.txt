@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://friendlybearlabs.com/sitemap-index.xml
+Sitemap: https://getcosmic.dev/sitemap-index.xml

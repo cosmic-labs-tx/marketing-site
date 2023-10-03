@@ -41,11 +41,11 @@ export const services = [
 
 export const pricingTiers = [
   {
-    name: "Cub",
-    id: "tier-cub",
-    href: "/schedule-call?tier=cub",
+    name: "Astronaut",
+    id: "tier-astronaut",
+    href: "/schedule-call?tier=astronaut",
     price: "$199",
-    description: "The essentials to get your business online.",
+    description: "The essentials to launch your Cosmic presence.",
     features: [
       "Pre-designed template",
       "Custom domain setup",
@@ -57,11 +57,11 @@ export const pricingTiers = [
     mostPopular: false,
   },
   {
-    name: "Grizzly",
-    id: "tier-grizzly",
-    href: "/schedule-call?tier=grizzly",
+    name: "Galaxy",
+    id: "tier-galaxy",
+    href: "/schedule-call?tier=galaxy",
     price: "$499",
-    description: "Perfect for small businesses that are growing quickly.",
+    description: "Perfect for businesses ready for blast-off.",
     features: [
       "Pre-designed template",
       "Up to 5 pages",
@@ -73,11 +73,11 @@ export const pricingTiers = [
     mostPopular: true,
   },
   {
-    name: "Bigfoot",
-    id: "tier-bigfoot",
-    href: "/schedule-call?tier=bigfoot",
+    name: "Supernova",
+    id: "tier-supernova",
+    href: "/schedule-call?tier=supernova",
     price: "$1,499 ",
-    description: "A custom website that scales with your business.",
+    description: "Limitless possibilities in the digital cosmos.",
     features: [
       "Custom design",
       "Up to 10 pages and blog",

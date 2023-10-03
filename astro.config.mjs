@@ -6,7 +6,7 @@ import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://friendlybearlabs.com",
+  site: "https://getcosmic.dev",
   output: "static",
   integrations: [
     partytown(),
