@@ -15,6 +15,7 @@ if (meta instanceof HTMLInputElement) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  msg.style.opacity = "0";
   btn.disabled = true;
   const formData = new FormData(form);
   fetch(form.action, {
@@ -30,7 +31,6 @@ form.addEventListener("submit", (e) => {
       msg.style.opacity = "1";
       msg.style.visibility = "visible";
       if (res.ok) {
-        form.reset();
         msg.style.color = "var(--color-success)";
         msg.textContent = "Thanks for reaching out! We'll be in touch soon.";
       } else {
