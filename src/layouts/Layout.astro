@@ -55,7 +55,7 @@ const {
       defer
       type="text/partytown"
       src="https://analytics.umami.is/script.js"
-      data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
+      data-website-id={`${import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}`}
       data-domains=`${SITE_HOSTNAME},www.${SITE_HOSTNAME}`></script>
     <script src="~/scripts/remove-turnstile.ts"></script>
     <ViewTransitions fallback="none" />

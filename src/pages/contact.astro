@@ -44,7 +44,7 @@ const meta = {
         method="post"
         class="max-w-md space-y-5"
       >
-        <input type="hidden" name="clientId" value={import.meta.env.PUBLIC_CLIENT_ID} />
+        <input type="hidden" name="clientId" value={`${import.meta.env.PUBLIC_CLIENT_ID}`} />
         <FormField>
           <FormLabel for="name">Name</FormLabel>
           <FormInput id="name" name="name" required placeholder="Neil A." type="text" autocomplete="name" />
